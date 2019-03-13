@@ -30,12 +30,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    HomeProvide homeProvide = Provide.value<HomeProvide>(context);
+//    HomeProvide homeProvide = Provide.value<HomeProvide>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(S.of(context).appName),
-      ),
-      body: pages[homeProvide.bottomCurrentIndex],
+      body: Provide<HomeProvide>(builder: (context, child, homeProvide) {
+        return pages[homeProvide.bottomCurrentIndex];
+      }),
       bottomNavigationBar: bottomNavigationBar(context),
     );
   }
