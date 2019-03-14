@@ -5,5 +5,7 @@
   "bottomNavigationBarTitle3": "Search",
   "bottomNavigationBarTitle4": "Me",
 
-  "login": "Login"
+  "login": "Login",
+  "userName": "UserName",
+  "passWord": "PassWord"
 }

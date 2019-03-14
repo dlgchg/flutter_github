@@ -6,6 +6,7 @@ import 'package:provide/provide.dart';
 import 'generated/i18n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'ui/page/login.dart';
+import 'res/res.dart';
 
 void main() {
   var github = GitHubProvide();
@@ -35,8 +36,8 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      theme: ThemeData(
-        primaryColor: Colors.deepPurple,
+      theme: ThemeData.light().copyWith(
+        primaryColor: primaryColor,
       ),
       home: LoginPage(),
     );

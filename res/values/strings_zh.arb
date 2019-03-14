@@ -5,5 +5,7 @@
   "bottomNavigationBarTitle3": "搜索",
   "bottomNavigationBarTitle4": "我",
 
-  "login": "登录"
+  "login": "登录",
+  "userName": "用户名",
+  "passWord": "密码"
 }
