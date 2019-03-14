@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../widget/widget.dart';
 import '../../res/colors.dart';
+import '../../provide/github_provide.dart';
+import 'package:provide/provide.dart';
 
 /*
  * @TIME 2019-03-13 20:45
@@ -16,6 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    GitHubProvide gitHubProvide = Provide.value(context);
     return Scaffold(
       backgroundColor: primaryColor,
       body: Container(
@@ -26,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
             end: AlignmentDirectional.bottomCenter,
           ),
         ),
-        child: loginContainer(context),
+        child: loginContainer(context, gitHubProvide),
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:provide/provide.dart';
 import '../../generated/i18n.dart';
 import '../../res/res.dart';
 import '../page/home.dart';
+import '../../provide/github_provide.dart';
 
 /*
  * @Date: 2019-03-13 16:12 
@@ -27,7 +28,7 @@ Widget bottomNavigationBar(BuildContext context) {
   });
 }
 
-Widget loginContainer(BuildContext context) {
+Widget loginContainer(BuildContext context, GitHubProvide gitHubProvide) {
   return Center(
     child: Container(
       margin: EdgeInsets.only(top: dimen80),
@@ -64,6 +65,9 @@ Widget loginContainer(BuildContext context) {
                     labelText: S.of(context).userName,
                     prefixIcon: Icon(Icons.person),
                   ),
+                  onChanged: (s) {
+                    gitHubProvide.userName = s;
+                  },
                 ),
                 SizedBox(
                   height: dimen10,
@@ -76,19 +80,16 @@ Widget loginContainer(BuildContext context) {
                     labelText: S.of(context).passWord,
                     prefixIcon: Icon(Icons.https),
                   ),
+                  onChanged: (s) {
+                    gitHubProvide.passWord = s;
+                  },
                 ),
                 SizedBox(
                   height: dimen40,
                 ),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return HomePage();
-                        },
-                      ),
-                    );
+                    gitHubProvide.githubLogin(context);
                   },
                   padding: EdgeInsets.all(0),
                   textColor: loginButtonTextColor,

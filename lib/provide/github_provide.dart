@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:rxdart/rxdart.dart';
+import '../manager/login_manager.dart';
+import '../ui/page/home.dart';
 
 /*
  * @Date: 2019-03-13 14:30 
@@ -8,20 +9,31 @@ import 'package:rxdart/rxdart.dart';
  */
 
 class GitHubProvide with ChangeNotifier {
-
   String userName = '';
   String passWord = '';
 
   String accessToken = '';
 
-  setAccessToken(String token){
+  bool login = false;
+  String response = '';
+
+  setAccessToken(String token) {
     accessToken = token;
     notifyListeners();
   }
 
-  Observable login() {
-
+  githubLogin(BuildContext context) {
+    LoginManager().login(userName, passWord).then((data) {
+      if (data != null) {
+        response = data.toString();
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return HomePage();
+            },
+          ),
+        );
+      }
+    });
   }
-
 }
-
