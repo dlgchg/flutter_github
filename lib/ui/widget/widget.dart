@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../../common/widget_common.dart';
 import '../../provide/home_provide.dart';
 import 'package:provide/provide.dart';
+import '../../generated/i18n.dart';
 
 /*
  * @Date: 2019-03-13 16:12 
@@ -22,4 +23,19 @@ Widget bottomNavigationBar(BuildContext context) {
       },
     );
   });
+}
+
+Widget loginContainer(BuildContext context) {
+  return Container(
+    child: Column(
+      children: <Widget>[
+        TextField(controller: TextEditingController(),),
+        TextField(controller: TextEditingController(),),
+        RaisedButton(
+          onPressed: () {},
+          child: Text(S.of(context).login),
+        ),
+      ],
+    ),
+  );
 }

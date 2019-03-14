@@ -3,5 +3,7 @@
   "bottomNavigationBarTitle1": "热点",
   "bottomNavigationBarTitle2": "关注",
   "bottomNavigationBarTitle3": "搜索",
-  "bottomNavigationBarTitle4": "我"
+  "bottomNavigationBarTitle4": "我",
+
+  "login": "登录"
 }

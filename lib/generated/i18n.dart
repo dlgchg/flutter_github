@@ -24,6 +24,7 @@ class S implements WidgetsLocalizations {
   String get bottomNavigationBarTitle2 => "Star";
   String get bottomNavigationBarTitle3 => "Search";
   String get bottomNavigationBarTitle4 => "Me";
+  String get login => "Login";
 }
 
 class $en extends S {
@@ -44,6 +45,8 @@ class $zh extends S {
   String get bottomNavigationBarTitle1 => "热点";
   @override
   String get appName => "Fg";
+  @override
+  String get login => "登录";
   @override
   String get bottomNavigationBarTitle4 => "我";
 }

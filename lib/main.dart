@@ -5,6 +5,7 @@ import 'provide/home_provide.dart';
 import 'package:provide/provide.dart';
 import 'generated/i18n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'ui/page/login.dart';
 
 void main() {
   var github = GitHubProvide();
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.deepPurple,
       ),
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }
