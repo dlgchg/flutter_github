@@ -89,7 +89,12 @@ Widget loginContainer(BuildContext context, GitHubProvide gitHubProvide) {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    gitHubProvide.githubLogin(context);
+                    gitHubProvide
+                        .gitLogin()
+                        .doOnListen(() => print("onlisten"))
+                        .doOnDone(() => print("ondone"))
+                        .listen((data) => print(data.toString()),
+                            onError: (e) => print(e.toString()));
                   },
                   padding: EdgeInsets.all(0),
                   textColor: loginButtonTextColor,

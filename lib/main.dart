@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
-import 'ui/page/home.dart';
-import 'provide/github_provide.dart';
-import 'provide/home_provide.dart';
 import 'package:provide/provide.dart';
 import 'generated/i18n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'ui/page/login.dart';
 import 'res/res.dart';
+import 'top_config.dart';
 
 void main() {
-  var github = GitHubProvide();
-  var home = HomeProvide();
-  var providers = Providers();
-  providers
-    ..provide(Provider<GitHubProvide>.value(github))
-    ..provide(Provider<HomeProvide>.value(home));
+  
+  providers.provideValue(gitHubProvide);
 
   runApp(
     ProviderNode(
