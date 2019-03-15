@@ -43,7 +43,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     getValue(access_token).listen((data) {
-      if(data.toString().isNotEmpty) {
+      if(data != null && data.toString().isNotEmpty) {
         gitHubProvide.setAccessToken(data.toString());
         gitHubProvide.getUserInfo().listen((data) {
           Navigator.pushReplacementNamed(context, '/home');

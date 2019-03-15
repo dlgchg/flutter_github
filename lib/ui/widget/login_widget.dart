@@ -12,8 +12,7 @@ import '../../top_config.dart';
  */
 
 // 登录框
-Widget loginContainer(BuildContext context, GitHubProvide gitHubProvide,
-    AnimationController _animationController) {
+Widget loginContainer(BuildContext context, AnimationController _animationController) {
   return Center(
     child: Container(
       margin: EdgeInsets.only(top: dimen80),
@@ -43,7 +42,6 @@ Widget loginContainer(BuildContext context, GitHubProvide gitHubProvide,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 TextField(
-                  controller: TextEditingController(),
                   autofocus: true,
                   maxLines: 1,
                   decoration: InputDecoration(
@@ -58,7 +56,6 @@ Widget loginContainer(BuildContext context, GitHubProvide gitHubProvide,
                   height: dimen10,
                 ),
                 TextField(
-                  controller: TextEditingController(),
                   obscureText: true,
                   maxLines: 1,
                   decoration: InputDecoration(
@@ -84,10 +81,13 @@ Widget loginContainer(BuildContext context, GitHubProvide gitHubProvide,
                                 _animationController.forward();
                               }).listen((_) {
                                 provide.getUserInfo().listen((_) {
+                                  _animationController.reverse();
                                   Navigator.pushReplacementNamed(context, '/home');
-                                }).onDone(() {
+                                }, onError: (e) {
                                   _animationController.reverse();
                                 });
+                              }, onError: (e) {
+                                _animationController.reverse();
                               });
                             } else {
                               SnackBar snackBar = SnackBar(

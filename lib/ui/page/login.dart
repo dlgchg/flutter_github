@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage>
             end: AlignmentDirectional.bottomCenter,
           ),
         ),
-        child: loginContainer(context, gitHubProvide, _animationController),
+        child: loginContainer(context, _animationController),
       ),
     );
   }
