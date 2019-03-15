@@ -4,5 +4,4 @@
 
 
 <img src="https://raw.githubusercontent.com/dlgchg/flutter_github/master/screen_shot/s1.png" width=414 height=896 />
-
 <img src="https://raw.githubusercontent.com/dlgchg/flutter_github/master/screen_shot/s2.png" width=414 height=896 />
