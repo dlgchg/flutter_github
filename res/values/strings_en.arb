@@ -7,5 +7,11 @@
 
   "login": "Login",
   "userName": "UserName",
-  "passWord": "PassWord"
+  "passWord": "PassWord",
+  "nameOrPassWordIsNotEmpty": "username or password is not empty!",
+  "repositories": "Repositories",
+  "followers": "Followers",
+  "following": "Following",
+  "set": "Set",
+  "about": "About"
 }
