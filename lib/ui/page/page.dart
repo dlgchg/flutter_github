@@ -4,3 +4,4 @@ export 'person.dart';
 export 'search.dart';
 export 'star.dart';
 export 'trend.dart';
+export 'splash.dart';

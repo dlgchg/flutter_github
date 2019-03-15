@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
  */
 
 const primaryColor = Colors.deepPurple;
+const containerColor = Colors.white;
 const loginContainerColor = Colors.white;
 const loginButtonTextColor = Colors.white;
 const loginColor = [

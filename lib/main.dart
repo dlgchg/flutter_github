@@ -20,8 +20,10 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Flutter GitHub',
       localizationsDelegates: [
@@ -30,11 +32,12 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      theme: ThemeData.light().copyWith(
+      theme: ThemeData(
         primaryColor: primaryColor,
       ),
-      home: LoginPage(),
+      home: SplashPage(),
       routes: <String, WidgetBuilder>{
+        '/login': (context) => LoginPage(),
         '/home': (context) => HomePage(),
       },
     );

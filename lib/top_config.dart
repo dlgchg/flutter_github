@@ -44,7 +44,6 @@ GitHubProvide gitHubProvide = GitHubProvide(_gitHubNet);
 
 HomeProvide homeProvide = HomeProvide();
 
-
 final providers = Providers();
 
 class AuthInterceptor extends Interceptor {

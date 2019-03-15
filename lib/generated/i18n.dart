@@ -19,14 +19,19 @@ class S implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
+  String get about => "About";
   String get appName => "Fg";
   String get bottomNavigationBarTitle1 => "Trend";
   String get bottomNavigationBarTitle2 => "Star";
   String get bottomNavigationBarTitle3 => "Search";
   String get bottomNavigationBarTitle4 => "Me";
+  String get followers => "Followers";
+  String get following => "Following";
   String get login => "Login";
   String get nameOrPassWordIsNotEmpty => "username or password is not empty!";
   String get passWord => "PassWord";
+  String get repositories => "Repositories";
+  String get set => "Set";
   String get userName => "UserName";
 }
 
@@ -41,23 +46,33 @@ class $zh extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get bottomNavigationBarTitle3 => "搜索";
-  @override
   String get passWord => "密码";
-  @override
-  String get bottomNavigationBarTitle2 => "关注";
   @override
   String get nameOrPassWordIsNotEmpty => "用户名或者明白不能为空!";
   @override
-  String get bottomNavigationBarTitle1 => "热点";
+  String get set => "设置";
   @override
   String get appName => "Fg";
+  @override
+  String get about => "关于";
   @override
   String get login => "登录";
   @override
   String get userName => "用户名";
   @override
   String get bottomNavigationBarTitle4 => "我";
+  @override
+  String get bottomNavigationBarTitle3 => "搜索";
+  @override
+  String get bottomNavigationBarTitle2 => "关注";
+  @override
+  String get bottomNavigationBarTitle1 => "热点";
+  @override
+  String get followers => "关注";
+  @override
+  String get repositories => "仓库";
+  @override
+  String get following => "被关注";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {

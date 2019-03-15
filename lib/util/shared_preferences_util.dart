@@ -8,7 +8,9 @@ import 'package:rxdart/rxdart.dart';
 
 Future _get(String key) async {
   SharedPreferences sp = await SharedPreferences.getInstance();
+  print(key);
   var value = sp.get(key);
+  print(value);
   return value;
 }
 
