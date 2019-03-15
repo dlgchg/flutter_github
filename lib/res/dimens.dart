@@ -17,6 +17,8 @@ const dimen40 = 40.0;
 const dimen50 = 50.0;
 const dimen80 = 80.0;
 
+const dimen48 = 48.0;
+
 const loginButtonWidth = 260.0;
 const loginContainerHeight = 250.0;
 const loginContainerHeight420 = 420.0;

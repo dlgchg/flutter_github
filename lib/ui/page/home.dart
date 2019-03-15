@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../../generated/i18n.dart';
+import 'page.dart';
+import '../../provide/provide.dart';
 import '../widget/widget.dart';
-import '../../provide/home_provide.dart';
 import 'package:provide/provide.dart';
-import 'trend.dart';
-import 'star.dart';
-import 'search.dart';
-import 'person.dart';
 
 /*
  * @Date: 2019-03-13 14:34 
@@ -20,7 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   List pages = [
     TrendPage(),
     StarPage(),
@@ -30,10 +25,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-//    HomeProvide homeProvide = Provide.value<HomeProvide>(context);
     return Scaffold(
-      body: Provide<HomeProvide>(builder: (context, child, homeProvide) {
-        return pages[homeProvide.bottomCurrentIndex];
+      body: Provide<HomeProvide>(builder: (context, child, provide) {
+        return pages[provide.bottomCurrentIndex];
       }),
       bottomNavigationBar: bottomNavigationBar(context),
     );

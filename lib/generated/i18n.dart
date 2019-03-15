@@ -25,6 +25,7 @@ class S implements WidgetsLocalizations {
   String get bottomNavigationBarTitle3 => "Search";
   String get bottomNavigationBarTitle4 => "Me";
   String get login => "Login";
+  String get nameOrPassWordIsNotEmpty => "username or password is not empty!";
   String get passWord => "PassWord";
   String get userName => "UserName";
 }
@@ -45,6 +46,8 @@ class $zh extends S {
   String get passWord => "密码";
   @override
   String get bottomNavigationBarTitle2 => "关注";
+  @override
+  String get nameOrPassWordIsNotEmpty => "用户名或者明白不能为空!";
   @override
   String get bottomNavigationBarTitle1 => "热点";
   @override

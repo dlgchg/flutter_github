@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../../generated/i18n.dart';
+import '../../top_config.dart';
 
 /*
  * @Date: 2019-03-13 17:19 
@@ -16,7 +16,7 @@ class _PersonPageState extends State<PersonPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(S.of(context).bottomNavigationBarTitle4),),
+      appBar: AppBar(title: Text(gitHubProvide.userEntity.name),),
       body: Container(),
     );
   }

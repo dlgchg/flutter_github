@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'generated/i18n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'ui/page/login.dart';
-import 'res/res.dart';
 import 'top_config.dart';
+import 'res/res.dart';
+import 'ui/ui.dart';
 
 void main() {
   
-  providers.provideValue(gitHubProvide);
+  providers..provideValue(gitHubProvide)..provideValue(homeProvide);
 
   runApp(
     ProviderNode(
@@ -34,6 +34,9 @@ class MyApp extends StatelessWidget {
         primaryColor: primaryColor,
       ),
       home: LoginPage(),
+      routes: <String, WidgetBuilder>{
+        '/home': (context) => HomePage(),
+      },
     );
   }
 }
