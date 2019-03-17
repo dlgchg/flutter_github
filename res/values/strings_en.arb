@@ -12,6 +12,8 @@
   "repositories": "Repositories",
   "followers": "Followers",
   "following": "Following",
+  "stars": "Stars",
+  "watches": "Watches",
   "set": "Set",
   "about": "About"
 }

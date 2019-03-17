@@ -9,9 +9,11 @@
   "userName": "用户名",
   "passWord": "密码",
   "nameOrPassWordIsNotEmpty": "用户名或者明白不能为空!",
-  "repositories": "仓库",
-  "followers": "关注",
-  "following": "被关注",
+  "repositories": "Repositories",
+  "followers": "Followers",
+  "following": "Following",
+  "stars": "Stars",
+  "watches": "Watches",
   "set": "设置",
   "about": "关于"
 }

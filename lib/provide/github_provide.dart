@@ -46,6 +46,13 @@ class GitHubProvide with ChangeNotifier {
     notifyListeners();
   }
 
+  UserReposEntity userReposEntity;
+
+  setUserReposEntity(UserReposEntity userRepos) {
+    userReposEntity = userRepos;
+    notifyListeners();
+  }
+
   double loginBtnWidth = 260.0;
 
   setLoginBtnWidth(double width) {

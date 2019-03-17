@@ -5,6 +5,8 @@ import '../../res/res.dart';
 import '../../model/model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../generated/i18n.dart';
+import 'web.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 /*
  * @Date: 2019-03-13 17:19 
@@ -17,10 +19,11 @@ class PersonPage extends StatefulWidget {
 }
 
 class _PersonPageState extends State<PersonPage> {
+  UserEntity userEntity = gitHubProvide.userEntity;
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
-    UserEntity userEntity = gitHubProvide.userEntity;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -92,20 +95,36 @@ class _PersonPageState extends State<PersonPage> {
                       ],
                     ),
                     PopupMenuDivider(),
-                    Container(
-                      height: dimen40,
-                      child: Row(
-                        children: <Widget>[
-                          _countItem(
-                              (userEntity.publicRepos + userEntity.publicRepos)
-                                  .toString(),
-                              S.of(context).following),
-                          _countItem(userEntity.followers.toString(),
-                              S.of(context).followers),
-                          _countItem(userEntity.following.toString(),
-                              S.of(context).following),
-                        ],
+                    InkWell(
+                      child: Container(
+                        height: dimen40,
+                        child: Row(
+                          children: <Widget>[
+                            _countItem(
+                                (userEntity.publicRepos +
+                                        userEntity.publicRepos)
+                                    .toString(),
+                                S.of(context).following),
+                            _countItem(userEntity.followers.toString(),
+                                S.of(context).followers),
+                            _countItem(userEntity.following.toString(),
+                                S.of(context).following),
+                          ],
+                        ),
                       ),
+                      onTap: () {
+                        UserReposEntity userRepos = UserReposEntity();
+                        userRepos.name = userEntity.name;
+                        userRepos.login = userEntity.login;
+                        userRepos.reposUrl = userEntity.reposUrl;
+                        userRepos.starredUrl = userEntity.starredUrl;
+                        userRepos.followersUrl = userEntity.followersUrl;
+                        userRepos.followingUrl = userEntity.followingUrl;
+                        userRepos.subscriptionsUrl =
+                            userEntity.subscriptionsUrl;
+                        gitHubProvide.setUserReposEntity(userRepos);
+                        Navigator.pushNamed(context, '/repos');
+                      },
                     ),
                   ],
                 ),
@@ -118,7 +137,22 @@ class _PersonPageState extends State<PersonPage> {
                     _item(Icons.account_balance, userEntity.company),
                     _item(Icons.location_on, userEntity.location),
                     _item(Icons.email, userEntity.email),
-                    _item(Icons.http, userEntity.blog),
+                    InkWell(
+                      child: _item(Icons.http, userEntity.blog),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return WebPage(
+                                userEntity.name,
+                                userEntity.blog,
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -139,7 +173,7 @@ class _PersonPageState extends State<PersonPage> {
     );
   }
 
-  Expanded _countItem(String count, title) {
+  _countItem(String count, title) {
     return Expanded(
       child: Column(
         children: <Widget>[
@@ -158,27 +192,25 @@ class _PersonPageState extends State<PersonPage> {
     );
   }
 
-   _item(IconData icon, String title) {
-    return InkWell(
-      onTap: (){
-        showAboutDialog(context: context);
-      },
-      child: Container(
-        padding: EdgeInsets.only(
-            top: dimen15, left: dimen20, right: dimen20, bottom: dimen15),
-        child: Row(
-          children: <Widget>[
-            Icon(
-              icon,
-              color: primaryColor,
-              size: dimen20,
-            ),
-            SizedBox(
-              width: dimen15,
-            ),
-            Text(title ?? 'Blog'),
-          ],
-        ),
+  _item(IconData icon, String title) {
+    return Container(
+      padding: EdgeInsets.only(
+          top: dimen15, left: dimen20, right: dimen20, bottom: dimen15),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            icon,
+            color: primaryColor,
+            size: dimen20,
+          ),
+          SizedBox(
+            width: dimen15,
+          ),
+          Text(
+            title ?? "UnKnown",
+            style: TextStyle(color: title == null ? Colors.grey : Colors.black),
+          ),
+        ],
       ),
     );
   }

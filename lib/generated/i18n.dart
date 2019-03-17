@@ -32,7 +32,9 @@ class S implements WidgetsLocalizations {
   String get passWord => "PassWord";
   String get repositories => "Repositories";
   String get set => "Set";
+  String get stars => "Stars";
   String get userName => "UserName";
+  String get watches => "Watches";
 }
 
 class $en extends S {
@@ -50,11 +52,15 @@ class $zh extends S {
   @override
   String get nameOrPassWordIsNotEmpty => "用户名或者明白不能为空!";
   @override
+  String get watches => "Watches";
+  @override
   String get set => "设置";
   @override
   String get appName => "Fg";
   @override
   String get about => "关于";
+  @override
+  String get stars => "Stars";
   @override
   String get login => "登录";
   @override
@@ -68,11 +74,11 @@ class $zh extends S {
   @override
   String get bottomNavigationBarTitle1 => "热点";
   @override
-  String get followers => "关注";
+  String get followers => "Followers";
   @override
-  String get repositories => "仓库";
+  String get repositories => "Repositories";
   @override
-  String get following => "被关注";
+  String get following => "Following";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {

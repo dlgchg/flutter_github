@@ -5,3 +5,5 @@ export 'search.dart';
 export 'star.dart';
 export 'trend.dart';
 export 'splash.dart';
+export 'repos.dart';
+export 'web.dart';

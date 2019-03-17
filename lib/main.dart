@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/login': (context) => LoginPage(),
         '/home': (context) => HomePage(),
+        '/repos': (context) => ReposPage(),
       },
     );
   }
