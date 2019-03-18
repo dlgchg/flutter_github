@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
  * @Description TODO
  */
 
+const dimend5 = 0.5;
 const dimen2 = 2.0;
 const dimen3 = 3.0;
 const dimen5 = 5.0;

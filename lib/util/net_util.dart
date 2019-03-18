@@ -11,11 +11,11 @@ import 'package:dio/dio.dart';
 
 
 Observable get(String url, {Map<String, dynamic> params}) {
-  return Observable.fromFuture(_get(url, params: params)).asBroadcastStream();
+  return Observable.fromFuture(futureGet(url, params: params)).asBroadcastStream();
 }
 
 Observable post(String url, {Map<String, dynamic> params}) {
-  return Observable.fromFuture(_post(url, params: params)).asBroadcastStream();
+  return Observable.fromFuture(futurePost(url, params: params)).asBroadcastStream();
 }
 
 Observable postLoginJson(String url, {Object params}) {
@@ -23,18 +23,23 @@ Observable postLoginJson(String url, {Object params}) {
 }
 
 
-Future _get(String url, {Map<String, dynamic> params}) async {
+Future futureGet(String url, {Map<String, dynamic> params}) async {
   Response response = await dio.get(url, queryParameters: params);
   return response;
 }
 
-Future _post(String url, {Map<String, dynamic> params}) async {
+Future futurePost(String url, {Map<String, dynamic> params}) async {
   Response response = await dio.post(url, data: params);
   return response;
 }
 
 Future _postLoginJson(String url, {Object params}) async {
   Response response = await dioLogin.post(url, data: json.encode(params));
+  return response;
+}
+
+Future getNoGitApi(String url, {Map<String, dynamic> params}) async {
+  Response response = await Dio().get(url, queryParameters: params);
   return response;
 }
 

@@ -15,5 +15,9 @@
   "stars": "Stars",
   "watches": "Watches",
   "set": "Set",
-  "about": "About"
+  "about": "About",
+  "daily": "daily",
+  "weekly": "weekly",
+  "monthly": "monthly",
+  "all": "All"
 }

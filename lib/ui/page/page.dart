@@ -7,3 +7,4 @@ export 'trend.dart';
 export 'splash.dart';
 export 'repos.dart';
 export 'web.dart';
+export 'languages.dart';

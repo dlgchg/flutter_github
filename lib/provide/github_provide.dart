@@ -21,7 +21,11 @@ class GitHubProvide with ChangeNotifier {
 
   String userName = '';
   String passWord = '';
+  String login = '';
+  int page = 0;
 
+  String language = '';
+  String since = 'monthly';
 
   Response _response;
 
@@ -50,6 +54,13 @@ class GitHubProvide with ChangeNotifier {
 
   setUserReposEntity(UserReposEntity userRepos) {
     userReposEntity = userRepos;
+    notifyListeners();
+  }
+
+  List<StarEntity> starList = [];
+
+  setStarEntityList(List<StarEntity> list) {
+    starList = list;
     notifyListeners();
   }
 
@@ -88,13 +99,22 @@ class GitHubProvide with ChangeNotifier {
       _response = data;
       if (_response.statusCode == 200) {
         UserEntity userEntity = UserEntity.fromJson(_response.data as Map);
+        login = userEntity.login;
         setUserEntity(userEntity);
-        print(_response.data.toString());
+//        print(_response.data.toString());
       }
     }).doOnError((e) {
       if (e is DioError) {
         showSnackBar(e.response.data.toString());
       }
     });
+  }
+
+  Future getStar({String otherLogin}) async {
+    return await _gitHubNet.star(otherLogin ?? login, page);
+  }
+
+  Future getTrend() async {
+    return await _gitHubNet.trend(language, since);
   }
 }

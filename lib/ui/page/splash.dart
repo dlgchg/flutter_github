@@ -4,9 +4,6 @@ import '../../top_config.dart';
 import '../../res/res.dart';
 import '../../common/common.dart';
 import '../../util/util.dart';
-import '../../ui/ui.dart';
-import '../../provide/provide.dart';
-import 'package:dio/dio.dart';
 
 
 /*

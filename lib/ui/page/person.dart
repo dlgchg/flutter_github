@@ -5,8 +5,6 @@ import '../../res/res.dart';
 import '../../model/model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../generated/i18n.dart';
-import 'web.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 /*
  * @Date: 2019-03-13 17:19 
@@ -24,6 +22,9 @@ class _PersonPageState extends State<PersonPage> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+
+    gitHubProvide.login = userEntity.login;
+    print(userEntity.starredUrl);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -102,9 +103,9 @@ class _PersonPageState extends State<PersonPage> {
                           children: <Widget>[
                             _countItem(
                                 (userEntity.publicRepos +
-                                        userEntity.publicRepos)
+                                        userEntity.totalPrivateRepos)
                                     .toString(),
-                                S.of(context).following),
+                                S.of(context).repositories),
                             _countItem(userEntity.followers.toString(),
                                 S.of(context).followers),
                             _countItem(userEntity.following.toString(),
@@ -139,18 +140,8 @@ class _PersonPageState extends State<PersonPage> {
                     _item(Icons.email, userEntity.email),
                     InkWell(
                       child: _item(Icons.http, userEntity.blog),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return WebPage(
-                                userEntity.name,
-                                userEntity.blog,
-                              );
-                            },
-                          ),
-                        );
+                      onTap: (){
+                        launchURL(userEntity.blog);
                       },
                     ),
                   ],

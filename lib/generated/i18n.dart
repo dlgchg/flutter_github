@@ -20,14 +20,17 @@ class S implements WidgetsLocalizations {
   TextDirection get textDirection => TextDirection.ltr;
 
   String get about => "About";
+  String get all => "All";
   String get appName => "Fg";
   String get bottomNavigationBarTitle1 => "Trend";
   String get bottomNavigationBarTitle2 => "Star";
   String get bottomNavigationBarTitle3 => "Search";
   String get bottomNavigationBarTitle4 => "Me";
+  String get daily => "daily";
   String get followers => "Followers";
   String get following => "Following";
   String get login => "Login";
+  String get monthly => "monthly";
   String get nameOrPassWordIsNotEmpty => "username or password is not empty!";
   String get passWord => "PassWord";
   String get repositories => "Repositories";
@@ -35,6 +38,7 @@ class S implements WidgetsLocalizations {
   String get stars => "Stars";
   String get userName => "UserName";
   String get watches => "Watches";
+  String get weekly => "weekly";
 }
 
 class $en extends S {
@@ -49,6 +53,8 @@ class $zh extends S {
 
   @override
   String get passWord => "密码";
+  @override
+  String get all => "All";
   @override
   String get nameOrPassWordIsNotEmpty => "用户名或者明白不能为空!";
   @override
@@ -66,6 +72,8 @@ class $zh extends S {
   @override
   String get userName => "用户名";
   @override
+  String get weekly => "本周";
+  @override
   String get bottomNavigationBarTitle4 => "我";
   @override
   String get bottomNavigationBarTitle3 => "搜索";
@@ -79,6 +87,10 @@ class $zh extends S {
   String get repositories => "Repositories";
   @override
   String get following => "Following";
+  @override
+  String get daily => "今天";
+  @override
+  String get monthly => "本月";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {

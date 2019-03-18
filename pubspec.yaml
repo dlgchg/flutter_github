@@ -28,6 +28,7 @@ dependencies:
   flutter_screenutil: ^0.5.1
   sqflite: ^1.1.0
   url_launcher: ^5.0.2
+  flutter_easyrefresh: ^1.2.7
   dio: ^2.1.0
   shared_preferences: ^0.5.1
   webview_flutter: ^0.3.4
@@ -52,6 +53,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/data/languages.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

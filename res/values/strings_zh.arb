@@ -4,7 +4,6 @@
   "bottomNavigationBarTitle2": "关注",
   "bottomNavigationBarTitle3": "搜索",
   "bottomNavigationBarTitle4": "我",
-
   "login": "登录",
   "userName": "用户名",
   "passWord": "密码",
@@ -15,5 +14,9 @@
   "stars": "Stars",
   "watches": "Watches",
   "set": "设置",
-  "about": "关于"
+  "about": "关于",
+  "daily": "今天",
+  "weekly": "本周",
+  "monthly": "本月",
+  "all": "All"
 }

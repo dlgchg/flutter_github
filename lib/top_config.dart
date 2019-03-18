@@ -4,6 +4,10 @@ import 'provide/provide.dart';
 import 'net/github_net.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_easyrefresh/material_header.dart';
+import 'package:flutter_easyrefresh/material_footer.dart';
 
 /*
  * @TIME 2019-03-14 22:13
@@ -11,6 +15,8 @@ import 'package:flutter/cupertino.dart';
  */
 
 final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
+final GlobalKey<RefreshHeaderState> headerKey = new GlobalKey<RefreshHeaderState>();
+final GlobalKey<RefreshFooterState> footerKey = new GlobalKey<RefreshFooterState>();
 
 showSnackBar(String content) {
   SnackBar snackBar = SnackBar(
@@ -52,5 +58,11 @@ class AuthInterceptor extends Interceptor {
     options.headers
         .update("Authorization", (_) => token, ifAbsent: () => token);
     return super.onRequest(options);
+  }
+}
+
+launchURL(String url) async {
+  if(await canLaunch(url)) {
+    await launch(url);
   }
 }
