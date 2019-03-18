@@ -31,11 +31,9 @@ dependencies:
   flutter_easyrefresh: ^1.2.7
   dio: ^2.1.0
   shared_preferences: ^0.5.1
-  webview_flutter: ^0.3.4
   rxdart:
   provide:
   flutter_markdown:
-  flutter_webview_plugin: ^0.3.0+2
 
 
 dev_dependencies:
