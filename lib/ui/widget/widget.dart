@@ -76,7 +76,7 @@ Widget starItem(BuildContext context, StarEntity starEntity) {
                   margin: EdgeInsets.only(top: dimen5),
                   width: ScreenUtil.getInstance().setWidth(900),
                   child: Text(
-                    starEntity.description,
+                    starEntity.description ?? 'It is never too old to learn. ',
                     softWrap: true,
                   ),
                 ),

@@ -9,8 +9,6 @@ import '../widget/widget.dart';
 import 'package:flutter_easyrefresh/material_header.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import '../../delegate/delegate.dart';
-import 'package:provide/provide.dart';
-import '../../provide/provide.dart';
 
 /*
  * @Date: 2019-03-13 17:19 
