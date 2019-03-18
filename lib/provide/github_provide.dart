@@ -26,6 +26,7 @@ class GitHubProvide with ChangeNotifier {
 
   String language = '';
   String since = 'monthly';
+  String sort = 'best match';
 
   Response _response;
 

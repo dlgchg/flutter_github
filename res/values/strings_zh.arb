@@ -18,5 +18,10 @@
   "daily": "今天",
   "weekly": "本周",
   "monthly": "本月",
-  "all": "All"
+  "all": "全部语言",
+  "forks": "forks",
+  "updates": "updates",
+  "order": "排序顺序",
+  "sort": "排序依据",
+  "languages": "编程语言"
 }

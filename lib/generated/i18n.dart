@@ -29,13 +29,18 @@ class S implements WidgetsLocalizations {
   String get daily => "daily";
   String get followers => "Followers";
   String get following => "Following";
+  String get forks => "forks";
+  String get languages => "languages";
   String get login => "Login";
   String get monthly => "monthly";
   String get nameOrPassWordIsNotEmpty => "username or password is not empty!";
+  String get order => "order";
   String get passWord => "PassWord";
   String get repositories => "Repositories";
   String get set => "Set";
+  String get sort => "sort";
   String get stars => "Stars";
+  String get updates => "updates";
   String get userName => "UserName";
   String get watches => "Watches";
   String get weekly => "weekly";
@@ -54,25 +59,37 @@ class $zh extends S {
   @override
   String get passWord => "密码";
   @override
-  String get all => "All";
-  @override
   String get nameOrPassWordIsNotEmpty => "用户名或者明白不能为空!";
+  @override
+  String get about => "关于";
+  @override
+  String get login => "登录";
+  @override
+  String get updates => "updates";
+  @override
+  String get weekly => "本周";
+  @override
+  String get repositories => "Repositories";
+  @override
+  String get order => "排序顺序";
+  @override
+  String get all => "全部语言";
+  @override
+  String get forks => "forks";
   @override
   String get watches => "Watches";
   @override
   String get set => "设置";
   @override
-  String get appName => "Fg";
+  String get languages => "编程语言";
   @override
-  String get about => "关于";
+  String get appName => "Fg";
   @override
   String get stars => "Stars";
   @override
-  String get login => "登录";
+  String get sort => "排序依据";
   @override
   String get userName => "用户名";
-  @override
-  String get weekly => "本周";
   @override
   String get bottomNavigationBarTitle4 => "我";
   @override
@@ -83,8 +100,6 @@ class $zh extends S {
   String get bottomNavigationBarTitle1 => "热点";
   @override
   String get followers => "Followers";
-  @override
-  String get repositories => "Repositories";
   @override
   String get following => "Following";
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../../generated/i18n.dart';
 import '../../res/res.dart';
+import '../../top_config.dart';
 
 /*
  * @Date: 2019-03-13 17:19 
@@ -28,26 +29,47 @@ class _SearchPageState extends State<SearchPage>
 
   @override
   Widget build(BuildContext context) {
+    List<String> sort = [
+      S.of(context).stars,
+      S.of(context).forks,
+      S.of(context).updates,
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          decoration: BoxDecoration(color: containerColor),
-          child: TextField(
+          height: dimen40,
+          padding: EdgeInsets.only(left: dimen15, right: dimen10),
+          alignment: AlignmentDirectional.centerStart,
+          decoration: BoxDecoration(
+              color: containerColor,
+              borderRadius: BorderRadius.circular(dimen3)),
+          child: TextFormField(
             controller: _textEditingController,
-            maxLines: 1,
-            decoration: InputDecoration(
-              fillColor: containerColor,
+            decoration: InputDecoration.collapsed(
               hintText: '关键字',
-              prefixIcon: Icon(Icons.search),
-              suffixIcon: IconButton(
-                icon: Icon(Icons.highlight_off),
-                onPressed: () {},
-              ),
             ),
           ),
         ),
+        leading: IconButton(icon: Icon(Icons.language), onPressed: () {}, tooltip: S.of(context).languages,),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.language), onPressed: () {}),
+          IconButton(icon: Icon(Icons.arrow_downward), onPressed: () {}, tooltip: S.of(context).order,),
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return sort.map((s) {
+                return CheckedPopupMenuItem(
+                  checked: s == gitHubProvide.sort,
+                  value: s,
+                  child: Text(s),
+                );
+              }).toList();
+            },
+            icon: Icon(Icons.view_week),
+            onSelected: (s) {
+              gitHubProvide.sort = s;
+              setState(() {});
+            },
+            tooltip: S.of(context).sort,
+          ),
         ],
         bottom: TabBar(controller: _tabController, isScrollable: true, tabs: [
           Tab(

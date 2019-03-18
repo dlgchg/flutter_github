@@ -19,5 +19,10 @@
   "daily": "daily",
   "weekly": "weekly",
   "monthly": "monthly",
-  "all": "All"
+  "all": "All",
+  "forks": "forks",
+  "updates": "updates",
+  "order": "order",
+  "sort": "sort",
+  "languages": "languages"
 }
