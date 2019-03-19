@@ -7,6 +7,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provide/provide.dart';
 import '../../provide/provide.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'page.dart';
 
 /*
  * @Date: 2019-03-19 14:49 
@@ -26,8 +28,11 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
     super.initState();
     gitHubProvide.setTopBgHeight(0);
     _scrollController.addListener(() {
-      print(_scrollController.position.pixels.toString());
-      gitHubProvide.setTopBgHeight((_scrollController.position.pixels < 0 ? _scrollController.position.pixels : 1).abs().toDouble());
+      gitHubProvide.setTopBgHeight((_scrollController.position.pixels < 0
+              ? _scrollController.position.pixels
+              : 1)
+          .abs()
+          .toDouble());
     });
   }
 
@@ -39,7 +44,6 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
       ),
       body: FutureBuilder(
         builder: (context, snapshot) {
-          print(snapshot.data.toString());
           if (snapshot.hasData) {
             Response response = snapshot.data;
             ReposEntity entity = ReposEntity.fromJson(response.data);
@@ -57,126 +61,9 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
                     child: Container(
                       child: Column(
                         children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: dimen15, top: dimen5, right: dimen15),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  entity.fullName,
-                                  softWrap: true,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: containerColor,
-                                    fontSize: dimen20,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: dimen10,
-                                ),
-                                Text(
-                                  entity.description ??
-                                      'It is never too old to learn. ',
-                                  style: TextStyle(
-                                    color: containerColor,
-                                    fontSize: dimen14,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  softWrap: true,
-                                ),
-                                SizedBox(
-                                  height: dimen10,
-                                ),
-                                Card(
-                                  color: containerColor,
-                                  child: Container(
-                                    alignment: AlignmentDirectional.center,
-                                    height: dimen80,
-                                    child: Row(
-                                      children: <Widget>[
-                                        Expanded(
-                                          child: Column(
-                                            children: <Widget>[
-                                              Icon(Icons.remove_red_eye),
-                                              SizedBox(
-                                                height: dimen10,
-                                              ),
-                                              Text(entity.watchers.toString())
-                                            ],
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                          ),
-                                          flex: 1,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            children: <Widget>[
-                                              Icon(Icons.star),
-                                              SizedBox(
-                                                height: dimen10,
-                                              ),
-                                              Text(entity.stargazersCount
-                                                  .toString())
-                                            ],
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                          ),
-                                          flex: 1,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            children: <Widget>[
-                                              Icon(Icons.call_merge),
-                                              SizedBox(
-                                                height: dimen10,
-                                              ),
-                                              Text(entity.forksCount.toString())
-                                            ],
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                          ),
-                                          flex: 1,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: dimen15, top: dimen5, right: dimen15),
-                            child: Card(
-                              child: Container(
-                                child: Column(
-                                  children: <Widget>[
-                                    _item(Icons.language, 'Language',
-                                        entity.language),
-                                    _item(Icons.code, 'Vide Code',
-                                        entity.size.toString()),
-                                    _item(Icons.call_split, 'Branch',
-                                        entity.defaultBranch),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: dimen15, top: dimen5, right: dimen15),
-                            child: Card(
-                              child: Column(
-                                children: <Widget>[
-                                  _item(Icons.error, 'Issues',
-                                      entity.openIssuesCount.toString()),
-                                  _item(Icons.chrome_reader_mode, 'README', ''),
-                                ],
-                              ),
-                            ),
-                          ),
+                          _header(entity),
+                          _child(entity),
+                          _child2(entity),
                           _markdown(entity.defaultBranch),
                         ],
                       ),
@@ -192,6 +79,173 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
           }
         },
         future: gitHubProvide.getRepos(),
+      ),
+    );
+  }
+
+  _header(ReposEntity entity) {
+    return Container(
+      padding: EdgeInsets.only(left: dimen15, top: dimen5, right: dimen15),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            entity.fullName,
+            softWrap: true,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: containerColor,
+              fontSize: dimen20,
+            ),
+          ),
+          SizedBox(
+            height: dimen10,
+          ),
+          Text(
+            entity.description ?? 'It is never too old to learn. ',
+            style: TextStyle(
+              color: containerColor,
+              fontSize: dimen14,
+            ),
+            textAlign: TextAlign.center,
+            softWrap: true,
+          ),
+          SizedBox(
+            height: dimen10,
+          ),
+          Card(
+            color: containerColor,
+            child: Container(
+              alignment: AlignmentDirectional.center,
+              height: dimen80,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        Icon(Icons.remove_red_eye),
+                        SizedBox(
+                          height: dimen10,
+                        ),
+                        Text(entity.watchers.toString())
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                    flex: 1,
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        Icon(Icons.star),
+                        SizedBox(
+                          height: dimen10,
+                        ),
+                        Text(entity.stargazersCount.toString())
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                    flex: 1,
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        Icon(Icons.call_merge),
+                        SizedBox(
+                          height: dimen10,
+                        ),
+                        Text(entity.forksCount.toString())
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                    flex: 1,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _child(ReposEntity entity) {
+    return Container(
+      padding: EdgeInsets.only(left: dimen15, top: dimen5, right: dimen15),
+      child: Card(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              _item(
+                Icons.language,
+                'Language',
+                entity.language,
+              ),
+              InkWell(
+                child: _item(
+                  Icons.code,
+                  'Vide Code',
+                  entity.size.toString(),
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return TreesPage(
+                            '${entity.treesUrl.replaceAll('{/sha}', '')}/${entity.defaultBranch}',
+                            entity.name,
+                            '',
+                            entity.fullName,
+                            entity.defaultBranch);
+                      },
+                    ),
+                  );
+                },
+              ),
+              InkWell(
+                child: _item(
+                  Icons.call_split,
+                  'Branch',
+                  entity.defaultBranch,
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return BranchPage(
+                          '${entity.branchesUrl.replaceAll('{/branch}', '')}',
+                          entity.defaultBranch,
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _child2(ReposEntity entity) {
+    return Container(
+      padding: EdgeInsets.only(left: dimen15, top: dimen5, right: dimen15),
+      child: Card(
+        child: Column(
+          children: <Widget>[
+            _item(
+              Icons.error,
+              'Issues',
+              entity.openIssuesCount.toString(),
+            ),
+            _item(
+              Icons.chrome_reader_mode,
+              'README',
+              '',
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -239,6 +293,9 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
                 padding: EdgeInsets.all(dimen12),
                 child: MarkdownBody(
                   data: snapshot.data.toString(),
+                  onTapLink: (url) {
+                    launch(url);
+                  },
                 ),
               ),
             ),

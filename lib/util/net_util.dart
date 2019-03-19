@@ -24,7 +24,6 @@ Observable postLoginJson(String url, {Object params}) {
 
 
 Future futureGet(String url, {Map<String, dynamic> params}) async {
-  print(url);
   Response response = await dio.get(url, queryParameters: params);
   return response;
 }
@@ -40,7 +39,6 @@ Future _postLoginJson(String url, {Object params}) async {
 }
 
 Future getNoGitApi(String url, {Map<String, dynamic> params}) async {
-  print(url);
   Response response = await Dio().get(url, queryParameters: params);
   return response;
 }

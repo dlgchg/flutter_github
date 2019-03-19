@@ -1,10 +1,12 @@
 import 'package:flutter_github/model/search_user_entity.dart';
 import 'package:flutter_github/model/trend_entity.dart';
+import 'package:flutter_github/model/branch_entity.dart';
 import 'package:flutter_github/model/user_entity.dart';
 import 'package:flutter_github/model/repos_entity.dart';
 import 'package:flutter_github/model/user_repos_entity.dart';
 import 'package:flutter_github/model/star_entity.dart';
 import 'package:flutter_github/model/search_repos_entity.dart';
+import 'package:flutter_github/model/trees_entity.dart';
 
 class EntityFactory {
   static T generateOBJ<T>(json) {
@@ -14,6 +16,8 @@ class EntityFactory {
       return SearchUserEntity.fromJson(json) as T;
     } else if (T.toString() == "TrendEntity") {
       return TrendEntity.fromJson(json) as T;
+    } else if (T.toString() == "BranchEntity") {
+      return BranchEntity.fromJson(json) as T;
     } else if (T.toString() == "UserEntity") {
       return UserEntity.fromJson(json) as T;
     } else if (T.toString() == "ReposEntity") {
@@ -24,6 +28,8 @@ class EntityFactory {
       return StarEntity.fromJson(json) as T;
     } else if (T.toString() == "SearchReposEntity") {
       return SearchReposEntity.fromJson(json) as T;
+    } else if (T.toString() == "TreesEntity") {
+      return TreesEntity.fromJson(json) as T;
     } else {
       return null;
     }

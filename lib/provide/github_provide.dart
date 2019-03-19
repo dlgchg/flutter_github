@@ -39,6 +39,7 @@ class GitHubProvide with ChangeNotifier {
   String raw = 'https://raw.githubusercontent.com/';
 
   String fullName = '';
+  String treesBranch = 'master';
 
   Response _response;
 
@@ -156,5 +157,13 @@ class GitHubProvide with ChangeNotifier {
 
   Future getReadme(String branch) async {
     return await _gitHubNet.readme('$raw$fullName/$branch/README.md');
+  }
+
+  Future getTrees() async {
+    return await _gitHubNet.trees(fullName, treesBranch);
+  }
+
+  Future getTree(String url) async {
+    return await _gitHubNet.tree(url);
   }
 }

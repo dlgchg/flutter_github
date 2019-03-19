@@ -24,7 +24,6 @@ class _PersonPageState extends State<PersonPage> {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
 
     gitHubProvide.login = userEntity.login;
-    print(userEntity.starredUrl);
     return Scaffold(
       appBar: AppBar(
         title: Text(
