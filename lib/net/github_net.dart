@@ -52,4 +52,15 @@ class GitHubNet {
       'order': order ?? 'desc',
     });
   }
+  
+  Future repos(String fullName) async {
+    return await futureGet('repos/$fullName', params: {
+      'client_id': '1cb27874fc405af5d2e5',
+      'client_secret': '0e11c6aa68de8a5deef663bc815f5bf6099687f5',
+    });
+  }
+
+  Future readme(String url) async {
+    return await getNoGitApi(url);
+  }
 }

@@ -36,9 +36,22 @@ class GitHubProvide with ChangeNotifier {
   String searchLanguages = '';
   int searchType = 0;
 
+  String raw = 'https://raw.githubusercontent.com/';
+
+  String fullName = '';
+
   Response _response;
 
+  double topBgHeight = 0;
+
+  setTopBgHeight(double h) {
+    topBgHeight = h;
+    notifyListeners();
+  }
+
   String accessToken = '';
+
+
 
   setAccessToken(String value) {
     accessToken = value;
@@ -135,5 +148,13 @@ class GitHubProvide with ChangeNotifier {
       order: searchOrder,
       language: searchLanguages,
     );
+  }
+
+  Future getRepos() async {
+    return await _gitHubNet.repos(fullName);
+  }
+
+  Future getReadme(String branch) async {
+    return await _gitHubNet.readme('$raw$fullName/$branch/README.md');
   }
 }
