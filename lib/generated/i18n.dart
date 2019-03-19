@@ -27,9 +27,12 @@ class S implements WidgetsLocalizations {
   String get bottomNavigationBarTitle3 => "Search";
   String get bottomNavigationBarTitle4 => "Me";
   String get daily => "daily";
+  String get follower => "followers";
   String get followers => "Followers";
   String get following => "Following";
   String get forks => "forks";
+  String get joined => "joined";
+  String get key => "key";
   String get languages => "languages";
   String get login => "Login";
   String get monthly => "monthly";
@@ -37,8 +40,10 @@ class S implements WidgetsLocalizations {
   String get order => "order";
   String get passWord => "PassWord";
   String get repositories => "Repositories";
+  String get repository => "repositories";
   String get set => "Set";
   String get sort => "sort";
+  String get star => "stars";
   String get stars => "Stars";
   String get updates => "updates";
   String get userName => "UserName";
@@ -67,9 +72,13 @@ class $zh extends S {
   @override
   String get updates => "updates";
   @override
+  String get repository => "repositories";
+  @override
   String get weekly => "本周";
   @override
   String get repositories => "Repositories";
+  @override
+  String get key => "关键字";
   @override
   String get order => "排序顺序";
   @override
@@ -81,9 +90,15 @@ class $zh extends S {
   @override
   String get set => "设置";
   @override
+  String get follower => "followers";
+  @override
   String get languages => "编程语言";
   @override
+  String get star => "stars";
+  @override
   String get appName => "Fg";
+  @override
+  String get joined => "joined";
   @override
   String get stars => "Stars";
   @override

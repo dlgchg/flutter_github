@@ -24,6 +24,7 @@ Observable postLoginJson(String url, {Object params}) {
 
 
 Future futureGet(String url, {Map<String, dynamic> params}) async {
+  print(url+params.toString());
   Response response = await dio.get(url, queryParameters: params);
   return response;
 }

@@ -86,7 +86,7 @@ class SearchReposItem {
 	bool hasIssues;
 	String url;
 	String contentsUrl;
-	Null mirrorUrl;
+	String mirrorUrl;
 	String milestonesUrl;
 	String teamsUrl;
 	bool fork;
@@ -265,7 +265,7 @@ class SearchReposItemsLicense {
 	String name;
 	String spdxId;
 	String key;
-	Null url;
+	String url;
 	String nodeId;
 
 	SearchReposItemsLicense({this.name, this.spdxId, this.key, this.url, this.nodeId});

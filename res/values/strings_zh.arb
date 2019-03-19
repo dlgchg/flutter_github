@@ -23,5 +23,10 @@
   "updates": "updates",
   "order": "排序顺序",
   "sort": "排序依据",
-  "languages": "编程语言"
+  "languages": "编程语言",
+  "joined": "joined",
+  "key": "关键字",
+  "follower": "followers",
+  "repository": "repositories",
+  "star": "stars"
 }

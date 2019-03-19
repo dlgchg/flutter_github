@@ -9,6 +9,11 @@ import '../top_config.dart';
  */
 
 class SearchLanguagesDelegate extends SearchDelegate {
+
+  // 0 trend, 1 search
+  final int type;
+  SearchLanguagesDelegate(this.type);
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -37,9 +42,13 @@ class SearchLanguagesDelegate extends SearchDelegate {
     // TODO: implement buildResults
     return ListTile(
       title: Text(query),
-      leading: gitHubProvide.language == query ? Icon(Icons.check) : null,
+      leading: (type == 0 ? gitHubProvide.language :gitHubProvide.searchLanguages) == query ? Icon(Icons.check) : null,
       onTap: () {
-        gitHubProvide.language = query;
+        if (type == 0) {
+          gitHubProvide.language = query;
+        } else {
+          gitHubProvide.searchLanguages = query;
+        }
         close(context, query);
       },
     );
@@ -57,12 +66,16 @@ class SearchLanguagesDelegate extends SearchDelegate {
           return ListView.builder(
             itemBuilder: (context, index) {
               return ListTile(
-                leading: gitHubProvide.language == list[index]['name']
+                leading: (type == 0 ? gitHubProvide.language :gitHubProvide.searchLanguages) == list[index]['name']
                     ? Icon(Icons.check)
                     : null,
                 title: Text(list[index]['name']),
                 onTap: () {
-                  gitHubProvide.language = list[index]['name'];
+                  if (type == 0) {
+                    gitHubProvide.language = list[index]['name'];
+                  } else {
+                    gitHubProvide.searchLanguages = list[index]['name'];
+                  }
                   close(context, list[index]['name']);
                 },
               );

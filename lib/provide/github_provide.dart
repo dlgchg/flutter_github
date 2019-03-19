@@ -28,6 +28,14 @@ class GitHubProvide with ChangeNotifier {
   String since = 'monthly';
   String sort = 'best match';
 
+  // 搜索页的全局变量
+  String searchKey = '';
+  String searchReposSort = 'best match';
+  String searchUsersSort = 'best match';
+  String searchOrder = 'desc';
+  String searchLanguages = '';
+  int searchType = 0;
+
   Response _response;
 
   String accessToken = '';
@@ -117,5 +125,15 @@ class GitHubProvide with ChangeNotifier {
 
   Future getTrend() async {
     return await _gitHubNet.trend(language, since);
+  }
+
+  Future getSearch() async {
+    return await _gitHubNet.search(
+      searchType,
+      searchKey,
+      sort: searchType == 0 ? searchReposSort : searchUsersSort,
+      order: searchOrder,
+      language: searchLanguages,
+    );
   }
 }

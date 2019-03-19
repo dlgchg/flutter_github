@@ -1,6 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import '../util/net_util.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 /*
  * @TIME 2019-03-14 22:40
@@ -42,5 +43,13 @@ class GitHubNet {
 
   Future languages() async {
     return await getNoGitApi('https://github-trending-api.now.sh/languages');
+  }
+
+  Future search(int type, String q, {String sort, String order, String language}) async {
+    return await futureGet(type == 0 ? 'search/repositories' : 'search/users', params: {
+      'q':q + (language != null && language.isNotEmpty ? '+language:'+language : ''),
+      'sort': sort ?? 'best match',
+      'order': order ?? 'desc',
+    });
   }
 }

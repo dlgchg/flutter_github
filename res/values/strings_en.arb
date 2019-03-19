@@ -24,5 +24,10 @@
   "updates": "updates",
   "order": "order",
   "sort": "sort",
-  "languages": "languages"
+  "languages": "languages",
+  "joined": "joined",
+  "key": "key",
+  "follower": "followers",
+  "repository": "repositories",
+  "star": "stars"
 }

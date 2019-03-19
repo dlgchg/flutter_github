@@ -38,7 +38,7 @@ class _TrendPageState extends State<TrendPage> {
         title: Text(S.of(context).bottomNavigationBarTitle1),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.language), onPressed: () {
-            showSearch(context: context, delegate: SearchLanguagesDelegate()).then((data) {
+            showSearch(context: context, delegate: SearchLanguagesDelegate(0)).then((data) {
               if(data != null) {
                 setState(() {});
               }
