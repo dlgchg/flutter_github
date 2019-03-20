@@ -46,6 +46,9 @@ class _BranchPageState extends State<BranchPage> {
                     leading: Icon(Icons.call_split),
                     title: Text(entity.name),
                     trailing: entity.name == _branch ? Icon(Icons.check) : null,
+                    onTap: (){
+                      Navigator.pop(context, [entity.name]);
+                    },
                   );
                 },
                 itemCount: list.length,

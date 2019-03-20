@@ -40,6 +40,18 @@ class GitHubProvide with ChangeNotifier {
 
   String fullName = '';
   String treesBranch = 'master';
+  bool reposStared = false;
+  bool reposWatched = false;
+
+  setReposStared(bool stared) {
+    reposStared = stared;
+    notifyListeners();
+  }
+
+  setReposWatched(bool watched) {
+    reposWatched = watched;
+    notifyListeners();
+  }
 
   Response _response;
 
@@ -49,10 +61,6 @@ class GitHubProvide with ChangeNotifier {
     topBgHeight = h;
     notifyListeners();
   }
-
-  String accessToken = '';
-
-
 
   setAccessToken(String value) {
     accessToken = value;
@@ -133,6 +141,14 @@ class GitHubProvide with ChangeNotifier {
     });
   }
 
+  Observable stared(int type) {
+    return _gitHubNet.stared(type,fullName);
+  }
+
+  Observable watched(int type) {
+    return _gitHubNet.watched(type,fullName);
+  }
+
   Future getStar({String otherLogin}) async {
     return await _gitHubNet.star(otherLogin ?? login, page);
   }
@@ -165,5 +181,9 @@ class GitHubProvide with ChangeNotifier {
 
   Future getTree(String url) async {
     return await _gitHubNet.tree(url);
+  }
+
+  Future url(String url) async {
+    return await _gitHubNet.url(url, page);
   }
 }

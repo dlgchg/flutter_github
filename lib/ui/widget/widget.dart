@@ -276,7 +276,7 @@ Widget searchReposItem(BuildContext context, SearchReposItem item) {
                       color: containerColor,
                       borderRadius: BorderRadius.circular(dimen5),
                       image: DecorationImage(
-                        image: NetworkImage(item.owner.avatarUrl),
+                        image: NetworkImage(item.owner.avatarUrl ?? avatarUrl),
                       ),
                     ),
                   ),
@@ -378,6 +378,75 @@ Widget searchReposItem(BuildContext context, SearchReposItem item) {
 }
 
 Widget searchUsersItem(BuildContext context, SearchUserItem item) {
+  return Column(
+    children: <Widget>[
+      Container(
+        alignment: AlignmentDirectional.topStart,
+        padding: EdgeInsets.all(dimen10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          verticalDirection: VerticalDirection.down,
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Container(
+                  width: dimen40,
+                  height: dimen40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(dimen5),
+                    color: containerColor,
+                  ),
+                ),
+                Container(
+                  width: dimen40,
+                  height: dimen40,
+                  decoration: BoxDecoration(
+                    color: containerColor,
+                    borderRadius: BorderRadius.circular(dimen5),
+                    image: DecorationImage(
+                      image: NetworkImage(item.avatarUrl),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              width: dimen10,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  width: ScreenUtil.getInstance().setWidth(850),
+                  child: Text(
+                    item.login,
+                    style: TextStyle(
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: dimen15,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: dimen5),
+                  width: ScreenUtil.getInstance().setWidth(850),
+                  child: Text(
+                    item.url,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+      Divider(),
+    ],
+  );
+}
+
+Widget reposUsersItem(BuildContext context, ReposUserEntity item) {
   return Column(
     children: <Widget>[
       Container(

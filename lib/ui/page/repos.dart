@@ -4,6 +4,8 @@ import 'package:provide/provide.dart';
 import '../../top_config.dart';
 import '../../model/model.dart';
 import '../../generated/i18n.dart';
+import 'package:dio/dio.dart';
+import '../widget/widget.dart';
 
 /*
  * @TIME 2019-03-17 17:03
@@ -20,11 +22,22 @@ class _ReposPageState extends State<ReposPage>
   TabController _tabController;
   PageController _pageController = PageController(initialPage: 0);
   bool isPageCanChanged = true;
+  UserReposEntity _userReposEntity;
+  List _urls = [];
+  String _url;
 
   @override
   void initState() {
     super.initState();
-
+    _userReposEntity = gitHubProvide.userReposEntity;
+    _urls = [
+      _userReposEntity.reposUrl,
+      _userReposEntity.starredUrl,
+      _userReposEntity.followersUrl,
+      _userReposEntity.followingUrl,
+      _userReposEntity.subscriptionsUrl,
+    ];
+    _url = _urls[0];
     _tabController = TabController(length: 5, vsync: this);
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) {
@@ -45,6 +58,17 @@ class _ReposPageState extends State<ReposPage>
       );
       isPageCanChanged = true;
     }
+    print(_urls[index]);
+
+    setState(() {
+      if (index == 1) {
+        _url = _urls[index].toString().replaceAll('{/owner}{/repo}', '');
+      } else if (index == 3) {
+        _url = _urls[index].toString().replaceAll('{/other_user}', '');
+      } else {
+        _url = _urls[index];
+      }
+    });
   }
 
   UserReposEntity userRepos = gitHubProvide.userReposEntity;
@@ -72,8 +96,36 @@ class _ReposPageState extends State<ReposPage>
         ),
       ),
       body: PageView.builder(
+        physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return Container();
+          return FutureBuilder(
+            future: gitHubProvide.url(_url),
+            builder: (context, snap) {
+              if (snap.hasData) {
+                Response response = snap.data;
+                List<Map> list = (response.data as List).cast();
+                return ListView.builder(
+                  itemBuilder: (context, index) {
+                    if (_tabController.index == 2 ||
+                        _tabController.index == 3) {
+                      ReposUserEntity item =
+                          ReposUserEntity.fromJson(list[index]);
+                      return reposUsersItem(context, item);
+                    } else {
+                      SearchReposItem item =
+                          SearchReposItem.fromJson(list[index]);
+                      return searchReposItem(context, item);
+                    }
+                  },
+                  itemCount: list.length,
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+          );
         },
         itemCount: _tabs.length,
         controller: _pageController,

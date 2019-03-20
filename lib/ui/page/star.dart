@@ -38,6 +38,7 @@ class _StarPageState extends State<StarPage> with AutomaticKeepAliveClientMixin{
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(S.of(context).bottomNavigationBarTitle2),
       ),
       body: FutureBuilder(

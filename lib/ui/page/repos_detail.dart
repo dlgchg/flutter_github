@@ -23,6 +23,8 @@ class ReposDetailPage extends StatefulWidget {
 class _ReposDetailPageState extends State<ReposDetailPage> {
   ScrollController _scrollController = ScrollController();
 
+  String _branch = 'master';
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +35,19 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
               : 1)
           .abs()
           .toDouble());
+    });
+
+    gitHubProvide.stared(0).listen((data) {
+      Response response = data;
+      if (response.statusCode == 204) {
+        gitHubProvide.setReposStared(true);
+      }
+    });
+    gitHubProvide.watched(0).listen((data) {
+      Response response = data;
+      if (response.statusCode == 204) {
+        gitHubProvide.setReposWatched(true);
+      }
     });
   }
 
@@ -124,7 +139,25 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
                   Expanded(
                     child: Column(
                       children: <Widget>[
-                        Icon(Icons.remove_red_eye),
+                        InkWell(
+                          child: Provide<GitHubProvide>(
+                            builder: (context, child, provide) {
+                              return Icon(provide.reposWatched
+                                  ? Icons.visibility
+                                  : Icons.visibility_off);
+                            },
+                          ),
+                          onTap: () {
+                            gitHubProvide
+                                .watched(gitHubProvide.reposWatched ? 2 : 1)
+                                .listen((data) {
+                              Response response = data;
+                              if (response.statusCode == 204) {
+                                gitHubProvide.setReposWatched(true);
+                              }
+                            });
+                          },
+                        ),
                         SizedBox(
                           height: dimen10,
                         ),
@@ -137,7 +170,26 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
                   Expanded(
                     child: Column(
                       children: <Widget>[
-                        Icon(Icons.star),
+                        InkWell(
+                          onTap: () {
+                            gitHubProvide
+                                .stared(gitHubProvide.reposStared ? 2 : 1)
+                                .listen((data) {
+                              Response response = data;
+                              if (response.statusCode == 204) {
+                                gitHubProvide.setReposStared(true);
+                              }
+                            });
+                            ;
+                          },
+                          child: Provide<GitHubProvide>(
+                            builder: (context, child, provide) {
+                              return Icon(provide.reposStared
+                                  ? Icons.star
+                                  : Icons.star_border);
+                            },
+                          ),
+                        ),
                         SizedBox(
                           height: dimen10,
                         ),
@@ -192,11 +244,11 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
                     MaterialPageRoute(
                       builder: (context) {
                         return TreesPage(
-                            '${entity.treesUrl.replaceAll('{/sha}', '')}/${entity.defaultBranch}',
+                            '${entity.treesUrl.replaceAll('{/sha}', '')}/$_branch',
                             entity.name,
                             '',
                             entity.fullName,
-                            entity.defaultBranch);
+                            _branch);
                       },
                     ),
                   );
@@ -214,11 +266,13 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
                       builder: (context) {
                         return BranchPage(
                           '${entity.branchesUrl.replaceAll('{/branch}', '')}',
-                          entity.defaultBranch,
+                          _branch,
                         );
                       },
                     ),
-                  );
+                  ).then((value) {
+                    _branch = value[0] ?? 'master';
+                  });
                 },
               ),
             ],
@@ -270,7 +324,7 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
           ),
           Expanded(
             child: Text(
-              remark,
+              remark ?? '',
               textAlign: TextAlign.right,
             ),
             flex: 1,

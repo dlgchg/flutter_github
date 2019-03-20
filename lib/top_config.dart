@@ -26,10 +26,13 @@ showSnackBar(String content) {
 }
 
 String token = "";
-
+String accessToken = "";
 
 // 普通请求
 final Dio dio = _dio;
+
+// 普通请求
+final Dio dioActivity = _dio..interceptors.add(BearerAuthInterceptor());
 
 // 只限于等于使用
 final Dio dioLogin =_dio
@@ -57,6 +60,15 @@ class AuthInterceptor extends Interceptor {
   onRequest(RequestOptions options) {
     options.headers
         .update("Authorization", (_) => token, ifAbsent: () => token);
+    return super.onRequest(options);
+  }
+}
+
+class BearerAuthInterceptor extends Interceptor {
+  @override
+  onRequest(RequestOptions options) {
+    options.headers
+        .update("Authorization", (_) => 'Bearer $accessToken', ifAbsent: () => 'Bearer $accessToken');
     return super.onRequest(options);
   }
 }
