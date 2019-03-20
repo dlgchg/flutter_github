@@ -29,5 +29,8 @@
   "key": "key",
   "follower": "followers",
   "repository": "repositories",
-  "star": "stars"
+  "star": "stars",
+  "exit": "Exit",
+  "exit_n": "Clear All Data!",
+  "cancel": "Cancel"
 }

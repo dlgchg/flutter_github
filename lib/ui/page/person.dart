@@ -39,60 +39,65 @@ class _PersonPageState extends State<PersonPage> {
                 color: containerColor,
                 child: Column(
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.all(dimen10),
-                          width: dimen60,
-                          height: dimen60,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(dimen10),
-                            image: DecorationImage(
-                              image: NetworkImage(userEntity.avatarUrl),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, '/person_set');
+                      },
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.all(dimen10),
+                            width: dimen60,
+                            height: dimen60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(dimen10),
+                              image: DecorationImage(
+                                image: NetworkImage(userEntity.avatarUrl),
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                          height: dimen60,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                child: Text(
-                                  userEntity.login,
-                                  style: TextStyle(
-                                    color: primaryColor,
-                                    fontSize: dimen15,
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                              Expanded(
-                                child: Container(
-                                  width: ScreenUtil().setWidth(700),
+                          Container(
+                            height: dimen60,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Expanded(
                                   child: Text(
-                                    userEntity.bio,
-                                    softWrap: true,
+                                    userEntity.login,
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: dimen15,
+                                    ),
+                                  ),
+                                  flex: 2,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    width: ScreenUtil().setWidth(700),
+                                    child: Text(
+                                      userEntity.bio,
+                                      softWrap: true,
+                                      style: TextStyle(
+                                        fontSize: dimen12,
+                                      ),
+                                    ),
+                                  ),
+                                  flex: 2,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    userEntity.createdAt,
                                     style: TextStyle(
                                       fontSize: dimen12,
                                     ),
                                   ),
+                                  flex: 1,
                                 ),
-                                flex: 2,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  userEntity.createdAt,
-                                  style: TextStyle(
-                                    fontSize: dimen12,
-                                  ),
-                                ),
-                                flex: 1,
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     PopupMenuDivider(),
                     InkWell(
@@ -135,7 +140,7 @@ class _PersonPageState extends State<PersonPage> {
                 child: Column(
                   children: <Widget>[
                     _item(Icons.account_balance, userEntity.company),
-                    _item(Icons.location_on, userEntity.location),
+                    _item(Icons.location_city, userEntity.location),
                     _item(Icons.email, userEntity.email),
                     InkWell(
                       child: _item(Icons.http, userEntity.blog),

@@ -15,6 +15,7 @@ import '../../top_config.dart';
 Widget loginContainer(BuildContext context, AnimationController _animationController) {
   return Center(
     child: Container(
+      padding: EdgeInsets.only(bottom: dimen100),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

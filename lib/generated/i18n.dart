@@ -26,7 +26,10 @@ class S implements WidgetsLocalizations {
   String get bottomNavigationBarTitle2 => "Star";
   String get bottomNavigationBarTitle3 => "Search";
   String get bottomNavigationBarTitle4 => "Me";
+  String get cancel => "Cancel";
   String get daily => "daily";
+  String get exit => "Exit";
+  String get exit_n => "Clear All Data!";
   String get follower => "followers";
   String get followers => "Followers";
   String get following => "Following";
@@ -64,6 +67,8 @@ class $zh extends S {
   @override
   String get passWord => "密码";
   @override
+  String get cancel => "取消";
+  @override
   String get nameOrPassWordIsNotEmpty => "用户名或者明白不能为空!";
   @override
   String get about => "关于";
@@ -100,6 +105,8 @@ class $zh extends S {
   @override
   String get joined => "joined";
   @override
+  String get exit_n => "退出将会清空所有信息!";
+  @override
   String get stars => "Stars";
   @override
   String get sort => "排序依据";
@@ -111,6 +118,8 @@ class $zh extends S {
   String get bottomNavigationBarTitle3 => "搜索";
   @override
   String get bottomNavigationBarTitle2 => "关注";
+  @override
+  String get exit => "退出";
   @override
   String get bottomNavigationBarTitle1 => "热点";
   @override

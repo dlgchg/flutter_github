@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/home': (context) => HomePage(),
         '/repos': (context) => ReposPage(),
+        '/person_set': (context) => PersonSetPage(),
       },
     );
   }

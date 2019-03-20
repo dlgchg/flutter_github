@@ -28,5 +28,8 @@
   "key": "关键字",
   "follower": "followers",
   "repository": "repositories",
-  "star": "stars"
+  "star": "stars",
+  "exit": "退出",
+  "exit_n": "退出将会清空所有信息!",
+  "cancel": "取消"
 }
