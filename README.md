@@ -2,9 +2,7 @@
 
 使用flutter开发github客户端，练手用的，赞。
 
-还在更新中...
-
-即将完成。
+还在更新中... 待完成events, delete repos, sqflite, update info, contributions, app set.
 
 希望大家给点意见。
 
