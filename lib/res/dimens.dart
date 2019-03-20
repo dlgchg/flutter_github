@@ -24,6 +24,7 @@ const dimen80 = 80.0;
 const dimen100 = 100.0;
 const dimen130 = 130.0;
 const dimen150 = 150.0;
+const dimen200 = 200.0;
 
 const dimen48 = 48.0;
 

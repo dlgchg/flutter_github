@@ -76,7 +76,7 @@ Widget starItem(BuildContext context, StarEntity starEntity) {
                 children: <Widget>[
                   Container(
                     width: ScreenUtil.getInstance().setWidth(900),
-                    child:Text(
+                    child: Text(
                       starEntity.fullName,
                       style: TextStyle(
                         color: primaryColor,
@@ -245,7 +245,7 @@ Widget searchReposItem(BuildContext context, SearchReposItem item) {
   return InkWell(
     onTap: () {
       gitHubProvide.fullName = item.fullName;
-          Navigator.push(
+      Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ReposDetailPage()),
       );
@@ -378,139 +378,155 @@ Widget searchReposItem(BuildContext context, SearchReposItem item) {
 }
 
 Widget searchUsersItem(BuildContext context, SearchUserItem item) {
-  return Column(
-    children: <Widget>[
-      Container(
-        alignment: AlignmentDirectional.topStart,
-        padding: EdgeInsets.all(dimen10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          verticalDirection: VerticalDirection.down,
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Container(
-                  width: dimen40,
-                  height: dimen40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(dimen5),
-                    color: containerColor,
-                  ),
-                ),
-                Container(
-                  width: dimen40,
-                  height: dimen40,
-                  decoration: BoxDecoration(
-                    color: containerColor,
-                    borderRadius: BorderRadius.circular(dimen5),
-                    image: DecorationImage(
-                      image: NetworkImage(item.avatarUrl),
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => UsersDetailPage(item.url)),
+      );
+    },
+    child: Column(
+      children: <Widget>[
+        Container(
+          alignment: AlignmentDirectional.topStart,
+          padding: EdgeInsets.all(dimen10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            verticalDirection: VerticalDirection.down,
+            children: <Widget>[
+              Stack(
+                children: <Widget>[
+                  Container(
+                    width: dimen40,
+                    height: dimen40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(dimen5),
+                      color: containerColor,
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: dimen10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  width: ScreenUtil.getInstance().setWidth(850),
-                  child: Text(
-                    item.login,
-                    style: TextStyle(
-                      color: primaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: dimen15,
+                  Container(
+                    width: dimen40,
+                    height: dimen40,
+                    decoration: BoxDecoration(
+                      color: containerColor,
+                      borderRadius: BorderRadius.circular(dimen5),
+                      image: DecorationImage(
+                        image: NetworkImage(item.avatarUrl),
+                      ),
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: dimen5),
-                  width: ScreenUtil.getInstance().setWidth(850),
-                  child: Text(
-                    item.url,
-                    overflow: TextOverflow.ellipsis,
+                ],
+              ),
+              SizedBox(
+                width: dimen10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    width: ScreenUtil.getInstance().setWidth(850),
+                    child: Text(
+                      item.login,
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: dimen15,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
+                  Container(
+                    margin: EdgeInsets.only(top: dimen5),
+                    width: ScreenUtil.getInstance().setWidth(850),
+                    child: Text(
+                      item.url,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
-      ),
-      Divider(),
-    ],
+        Divider(),
+      ],
+    ),
   );
 }
 
 Widget reposUsersItem(BuildContext context, ReposUserEntity item) {
-  return Column(
-    children: <Widget>[
-      Container(
-        alignment: AlignmentDirectional.topStart,
-        padding: EdgeInsets.all(dimen10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          verticalDirection: VerticalDirection.down,
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Container(
-                  width: dimen40,
-                  height: dimen40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(dimen5),
-                    color: containerColor,
-                  ),
-                ),
-                Container(
-                  width: dimen40,
-                  height: dimen40,
-                  decoration: BoxDecoration(
-                    color: containerColor,
-                    borderRadius: BorderRadius.circular(dimen5),
-                    image: DecorationImage(
-                      image: NetworkImage(item.avatarUrl),
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => UsersDetailPage(item.url)),
+      );
+    },
+    child: Column(
+      children: <Widget>[
+        Container(
+          alignment: AlignmentDirectional.topStart,
+          padding: EdgeInsets.all(dimen10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            verticalDirection: VerticalDirection.down,
+            children: <Widget>[
+              Stack(
+                children: <Widget>[
+                  Container(
+                    width: dimen40,
+                    height: dimen40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(dimen5),
+                      color: containerColor,
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: dimen10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  width: ScreenUtil.getInstance().setWidth(850),
-                  child: Text(
-                    item.login,
-                    style: TextStyle(
-                      color: primaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: dimen15,
+                  Container(
+                    width: dimen40,
+                    height: dimen40,
+                    decoration: BoxDecoration(
+                      color: containerColor,
+                      borderRadius: BorderRadius.circular(dimen5),
+                      image: DecorationImage(
+                        image: NetworkImage(item.avatarUrl),
+                      ),
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: dimen5),
-                  width: ScreenUtil.getInstance().setWidth(850),
-                  child: Text(
-                    item.url,
-                    overflow: TextOverflow.ellipsis,
+                ],
+              ),
+              SizedBox(
+                width: dimen10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    width: ScreenUtil.getInstance().setWidth(850),
+                    child: Text(
+                      item.login,
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: dimen15,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
+                  Container(
+                    margin: EdgeInsets.only(top: dimen5),
+                    width: ScreenUtil.getInstance().setWidth(850),
+                    child: Text(
+                      item.url,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
-      ),
-      Divider(),
-    ],
+        Divider(),
+      ],
+    ),
   );
 }

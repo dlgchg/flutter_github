@@ -10,3 +10,4 @@ export 'languages.dart';
 export 'repos_detail.dart';
 export 'trees.dart';
 export 'branch.dart';
+export 'users_detail.dart';

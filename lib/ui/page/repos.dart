@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provide/provide.dart';
 import '../../top_config.dart';
 import '../../model/model.dart';
 import '../../generated/i18n.dart';
@@ -84,7 +83,7 @@ class _ReposPageState extends State<ReposPage>
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Text(userRepos.name),
+        title: Text(userRepos.name ?? userRepos.login),
         bottom: TabBar(
           isScrollable: true,
           tabs: _tabs.map((title) {
