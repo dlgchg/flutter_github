@@ -214,4 +214,8 @@ class GitHubProvide with ChangeNotifier {
   Future url(String url) async {
     return await _gitHubNet.url(url, page);
   }
+
+  Future contributions(String login) async {
+    return await _gitHubNet.contributions(login);
+  }
 }

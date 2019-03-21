@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:provide/provide.dart';
 import '../../provide/provide.dart';
 import '../../generated/i18n.dart';
+import '../../util/util.dart';
 /*
  * @Date: 2019-03-19 14:49 
  * @Description TODO
@@ -71,6 +72,7 @@ class _UsersDetailPageState extends State<UsersDetailPage> {
                         children: <Widget>[
                           _header(entity),
                           _child(entity),
+                          _contributions(entity),
                         ],
                       ),
                     ),
@@ -173,7 +175,7 @@ class _UsersDetailPageState extends State<UsersDetailPage> {
                         onPressed: () {
                           gitHubProvide
                               .followed(
-                              provide.usersFollowed ? 2 : 1, widget._login)
+                                  provide.usersFollowed ? 2 : 1, widget._login)
                               .listen((data) {
                             Response response = data;
                             if (response.statusCode == 204) {
@@ -182,10 +184,11 @@ class _UsersDetailPageState extends State<UsersDetailPage> {
                             }
                           });
                         },
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(dimen40)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(dimen40)),
                         color: primaryColor,
                         child:
-                        Text(provide.usersFollowed ? 'UnFollow' : 'Follow'),
+                            Text(provide.usersFollowed ? 'UnFollow' : 'Follow'),
                       );
                     },
                   ),
@@ -234,6 +237,98 @@ class _UsersDetailPageState extends State<UsersDetailPage> {
           ),
         ),
       ),
+    );
+  }
+
+  _contributions(UserEntity userEntity) {
+    return FutureBuilder(
+      builder: (context, snap) {
+        if (snap.hasData) {
+          Response response = snap.data;
+          ContributionsEntity contributionsEntity =
+              ContributionsEntity.fromJson(response.data);
+          if (contributionsEntity.contributions.length > 0) {
+            List<ContributionsContribution> list =
+                contributionsEntity.contributions;
+            DateTime dateTime = DateTime.now();
+            String now = dateTime.toString().substring(0, 10);
+            for(var i = 0; i < list.length ;i++) {
+              if(list[i].date == now) {
+                list = list.sublist(i, i + 365);
+                break;
+              }
+            }
+
+            list.sort((ContributionsContribution c1, ContributionsContribution c2) {
+              return DateTime.parse(c1.date).compareTo(DateTime.parse(c2.date));
+            });
+            return Container(
+              padding:
+                  EdgeInsets.only(left: dimen15, top: dimen5, right: dimen15),
+              child: Card(
+                child: Container(
+                  padding: EdgeInsets.all(dimen10),
+                  height: dimen110,
+                  child: GridView.builder(
+                    controller: ScrollController(
+                      initialScrollOffset: 1080,
+                    ),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      ContributionsContribution contribution = list[index];
+                      return Tooltip(
+                        message: contribution.count.toString(),
+                        child: Container(
+                          width: dimen12,
+                          height: dimen12,
+                          color: colorRGB(contribution.color),
+                        ),
+                      );
+                    },
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: dimen12,
+                      mainAxisSpacing: dimen2,
+                      crossAxisSpacing: dimen2,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }
+        } else {
+          return Container(
+            padding:
+                EdgeInsets.only(left: dimen15, top: dimen5, right: dimen15),
+            child: Card(
+              child: Container(
+                padding: EdgeInsets.all(dimen10),
+                height: dimen110,
+                child: GridView.builder(
+                  controller: ScrollController(
+                    initialScrollOffset: 1080,
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 365,
+                  itemBuilder: (context, _) {
+                    return Container(
+                      width: dimen12,
+                      height: dimen12,
+                      color: colorRGB('#ebedf0'),
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: dimen12,
+                    mainAxisSpacing: dimen2,
+                    crossAxisSpacing: dimen2,
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+      },
+      future: gitHubProvide.contributions(userEntity.login),
     );
   }
 

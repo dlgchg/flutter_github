@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../generated/i18n.dart';
 import 'package:provide/provide.dart';
 import '../../provide/provide.dart';
+import '../../util/util.dart';
+import 'package:dio/dio.dart';
 
 /*
  * @Date: 2019-03-13 17:19 
@@ -44,7 +46,7 @@ class _PersonPageState extends State<PersonPage> {
                   child: Column(
                     children: <Widget>[
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           Navigator.pushNamed(context, '/person_set');
                         },
                         child: Row(
@@ -111,7 +113,7 @@ class _PersonPageState extends State<PersonPage> {
                             children: <Widget>[
                               _countItem(
                                   (userEntity.publicRepos +
-                                      userEntity.totalPrivateRepos)
+                                          userEntity.totalPrivateRepos)
                                       .toString(),
                                   S.of(context).repositories),
                               _countItem(userEntity.followers.toString(),
@@ -139,6 +141,13 @@ class _PersonPageState extends State<PersonPage> {
                   ),
                 ),
                 Container(
+                  height: dimen110,
+                  color: containerColor,
+                  margin: EdgeInsets.only(top: dimen10),
+                  padding: EdgeInsets.all(dimen10),
+                  child: _contributions(userEntity),
+                ),
+                Container(
                   margin: EdgeInsets.only(top: dimen10),
                   color: containerColor,
                   child: Column(
@@ -148,7 +157,7 @@ class _PersonPageState extends State<PersonPage> {
                       _item(Icons.email, userEntity.email),
                       InkWell(
                         child: _item(Icons.http, userEntity.blog),
-                        onTap: (){
+                        onTap: () {
                           launchURL(userEntity.blog);
                         },
                       ),
@@ -212,6 +221,78 @@ class _PersonPageState extends State<PersonPage> {
           ),
         ],
       ),
+    );
+  }
+
+  _contributions(UserEntity userEntity) {
+    return FutureBuilder(
+      builder: (context, snap) {
+        if (snap.hasData) {
+          Response response = snap.data;
+          ContributionsEntity contributionsEntity =
+              ContributionsEntity.fromJson(response.data);
+          if (contributionsEntity.contributions.length > 0) {
+            List<ContributionsContribution> list =
+                contributionsEntity.contributions;
+            DateTime dateTime = DateTime.now();
+            String now = dateTime.toString().substring(0, 10);
+            for(var i = 0; i < list.length ;i++) {
+              if(list[i].date == now) {
+                list = list.sublist(i, i + 365);
+                break;
+              }
+            }
+            list.sort((ContributionsContribution c1, ContributionsContribution c2) {
+              return DateTime.parse(c1.date).compareTo(DateTime.parse(c2.date));
+            });
+
+            return GridView.builder(
+              controller: ScrollController(
+                initialScrollOffset: 1080,
+              ),
+              scrollDirection: Axis.horizontal,
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                ContributionsContribution contribution = list[index];
+                return Tooltip(
+                  message: contribution.date.toString(),
+                  child: Container(
+                    width: dimen12,
+                    height: dimen12,
+                    color: colorRGB(contribution.color),
+                  ),
+                );
+              },
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: dimen12,
+                mainAxisSpacing: dimen2,
+                crossAxisSpacing: dimen2,
+              ),
+            );
+          }
+        } else {
+          return GridView.builder(
+            controller: ScrollController(
+              initialScrollOffset: 1080,
+            ),
+            scrollDirection: Axis.horizontal,
+            itemCount: 365,
+            itemBuilder: (context, _) {
+              return Container(
+                width: dimen12,
+                height: dimen12,
+                color: colorRGB('#ebedf0'),
+              );
+            },
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: dimen12,
+              mainAxisSpacing: dimen2,
+              crossAxisSpacing: dimen2,
+            ),
+          );
+        }
+      },
+      future: gitHubProvide.contributions(userEntity.login),
     );
   }
 }

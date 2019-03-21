@@ -64,6 +64,10 @@ class GitHubNet {
     return await getNoGitApi('https://github-trending-api.now.sh/languages');
   }
 
+  Future contributions(String login) async {
+    return await getNoGitApi('https://github-contributions-api.now.sh/v1/$login');
+  }
+
   Future search(int type, String q, {String sort, String order, String language}) async {
     return await futureGet(type == 0 ? 'search/repositories' : 'search/users', params: {
       'q':q + (language != null && language.isNotEmpty ? '+language:'+language : ''),

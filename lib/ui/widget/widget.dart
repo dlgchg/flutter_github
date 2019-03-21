@@ -488,7 +488,7 @@ Widget reposUsersItem(BuildContext context, ReposUserEntity item) {
                       color: containerColor,
                       borderRadius: BorderRadius.circular(dimen5),
                       image: DecorationImage(
-                        image: NetworkImage(item.avatarUrl),
+                        image: NetworkImage(item.avatarUrl ?? avatarUrl),
                       ),
                     ),
                   ),

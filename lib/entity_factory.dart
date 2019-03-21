@@ -8,6 +8,7 @@ import 'package:flutter_github/model/star_entity.dart';
 import 'package:flutter_github/model/search_repos_entity.dart';
 import 'package:flutter_github/model/repos_user_entity.dart';
 import 'package:flutter_github/model/trees_entity.dart';
+import 'package:flutter_github/model/contributions_entity.dart';
 
 class EntityFactory {
   static T generateOBJ<T>(json) {
@@ -33,6 +34,8 @@ class EntityFactory {
       return ReposUserEntity.fromJson(json) as T;
     } else if (T.toString() == "TreesEntity") {
       return TreesEntity.fromJson(json) as T;
+    } else if (T.toString() == "ContributionsEntity") {
+      return ContributionsEntity.fromJson(json) as T;
     } else {
       return null;
     }
