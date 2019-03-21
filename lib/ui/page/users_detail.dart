@@ -14,8 +14,9 @@ import '../../generated/i18n.dart';
 
 class UsersDetailPage extends StatefulWidget {
   final String _url;
+  final String _login;
 
-  UsersDetailPage(this._url);
+  UsersDetailPage(this._url, this._login);
 
   @override
   _UsersDetailPageState createState() => _UsersDetailPageState();
@@ -34,6 +35,12 @@ class _UsersDetailPageState extends State<UsersDetailPage> {
               : 1)
           .abs()
           .toDouble());
+    });
+    gitHubProvide.followed(0, widget._login).listen((data) {
+      Response response = data;
+      if (response.statusCode == 204) {
+        gitHubProvide.setUsersFollowed(true);
+      }
     });
   }
 
@@ -128,33 +135,61 @@ class _UsersDetailPageState extends State<UsersDetailPage> {
             color: containerColor,
             child: Container(
               alignment: AlignmentDirectional.center,
-              height: dimen80,
-              child: InkWell(
-                child: Container(
-                  height: dimen50,
-                  child: Row(
-                    children: <Widget>[
-                      _countItem(userEntity.publicRepos.toString(),
-                          S.of(context).repositories),
-                      _countItem(userEntity.followers.toString(),
-                          S.of(context).followers),
-                      _countItem(userEntity.following.toString(),
-                          S.of(context).following),
-                    ],
+              height: dimen120,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  InkWell(
+                    child: Container(
+                      height: dimen50,
+                      child: Row(
+                        children: <Widget>[
+                          _countItem(userEntity.publicRepos.toString(),
+                              S.of(context).repositories),
+                          _countItem(userEntity.followers.toString(),
+                              S.of(context).followers),
+                          _countItem(userEntity.following.toString(),
+                              S.of(context).following),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      UserReposEntity userRepos = UserReposEntity();
+                      userRepos.name = userEntity.name;
+                      userRepos.login = userEntity.login;
+                      userRepos.reposUrl = userEntity.reposUrl;
+                      userRepos.starredUrl = userEntity.starredUrl;
+                      userRepos.followersUrl = userEntity.followersUrl;
+                      userRepos.followingUrl = userEntity.followingUrl;
+                      userRepos.subscriptionsUrl = userEntity.subscriptionsUrl;
+                      gitHubProvide.setUserReposEntity(userRepos);
+                      Navigator.pushNamed(context, '/repos');
+                    },
                   ),
-                ),
-                onTap: () {
-                  UserReposEntity userRepos = UserReposEntity();
-                  userRepos.name = userEntity.name;
-                  userRepos.login = userEntity.login;
-                  userRepos.reposUrl = userEntity.reposUrl;
-                  userRepos.starredUrl = userEntity.starredUrl;
-                  userRepos.followersUrl = userEntity.followersUrl;
-                  userRepos.followingUrl = userEntity.followingUrl;
-                  userRepos.subscriptionsUrl = userEntity.subscriptionsUrl;
-                  gitHubProvide.setUserReposEntity(userRepos);
-                  Navigator.pushNamed(context, '/repos');
-                },
+                  Provide<GitHubProvide>(
+                    builder: (context, child, provide) {
+                      return RaisedButton(
+                        textColor: containerColor,
+                        onPressed: () {
+                          gitHubProvide
+                              .followed(
+                              provide.usersFollowed ? 2 : 1, widget._login)
+                              .listen((data) {
+                            Response response = data;
+                            if (response.statusCode == 204) {
+                              gitHubProvide.setUsersFollowed(
+                                  gitHubProvide.usersFollowed ? false : true);
+                            }
+                          });
+                        },
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(dimen40)),
+                        color: primaryColor,
+                        child:
+                        Text(provide.usersFollowed ? 'UnFollow' : 'Follow'),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ),
@@ -241,7 +276,9 @@ class _UsersDetailPageState extends State<UsersDetailPage> {
                 color: primaryColor,
                 fontSize: dimen15,
               )),
-          SizedBox(height: dimen10,),
+          SizedBox(
+            height: dimen10,
+          ),
           Text(title,
               style: TextStyle(
                 fontSize: dimen12,

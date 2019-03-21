@@ -153,7 +153,7 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
                                 .listen((data) {
                               Response response = data;
                               if (response.statusCode == 204) {
-                                gitHubProvide.setReposWatched(true);
+                                gitHubProvide.setReposWatched(gitHubProvide.reposWatched ? false : true);
                               }
                             });
                           },
@@ -177,7 +177,7 @@ class _ReposDetailPageState extends State<ReposDetailPage> {
                                 .listen((data) {
                               Response response = data;
                               if (response.statusCode == 204) {
-                                gitHubProvide.setReposStared(true);
+                                gitHubProvide.setReposStared(gitHubProvide.reposStared ? false : true);
                               }
                             });
                             ;

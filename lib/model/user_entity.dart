@@ -23,7 +23,7 @@ class UserEntity {
 	UserPlan plan;
 	String email;
 	String organizationsUrl;
-	String hireable;
+	bool hireable;
 	String starredUrl;
 	String followersUrl;
 	int publicGists;

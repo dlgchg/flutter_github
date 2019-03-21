@@ -29,6 +29,14 @@ class GitHubNet {
     return activity(type, 'user/subscriptions/$fullName');
   }
 
+  Observable<dynamic> followed(int type,String username) {
+    return activity(type, 'user/following/$username');
+  }
+
+  Observable<dynamic> patchUser(int type, Map<String, dynamic> params) {
+    return activity(type, 'user', params: params);
+  }
+
   Future<Response> star(String login, int page,
       {String owner, repo, int size}) async {
     Response response = await futureGet(

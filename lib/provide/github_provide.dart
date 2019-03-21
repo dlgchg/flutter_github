@@ -42,6 +42,7 @@ class GitHubProvide with ChangeNotifier {
   String treesBranch = 'master';
   bool reposStared = false;
   bool reposWatched = false;
+  bool usersFollowed = false;
 
   setReposStared(bool stared) {
     reposStared = stared;
@@ -50,6 +51,10 @@ class GitHubProvide with ChangeNotifier {
 
   setReposWatched(bool watched) {
     reposWatched = watched;
+    notifyListeners();
+  }
+  setUsersFollowed(bool followed) {
+    usersFollowed = followed;
     notifyListeners();
   }
 
@@ -147,6 +152,29 @@ class GitHubProvide with ChangeNotifier {
 
   Observable watched(int type) {
     return _gitHubNet.watched(type,fullName);
+  }
+
+  Observable followed(int type, String login) {
+    return _gitHubNet.followed(type,login);
+  }
+
+  Observable patchUser() {
+    Map<String, dynamic> params = {
+      'name': userEntity.name,
+      'email': userEntity.email,
+      'blog': userEntity.blog,
+      'company': userEntity.company,
+      'location': userEntity.location,
+      'hireable': userEntity.hireable,
+      'bio': userEntity.bio,
+    };
+    return _gitHubNet.patchUser(3,params).doOnData((data) {
+      Response response = data;
+      if(response.statusCode == 200) {
+        UserEntity userEntity = UserEntity.fromJson(response.data);
+        setUserEntity(userEntity);
+      }
+    });
   }
 
   Future getStar({String otherLogin}) async {

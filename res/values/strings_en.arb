@@ -32,5 +32,6 @@
   "star": "stars",
   "exit": "Exit",
   "exit_n": "Clear All Data!",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "updated": "Updated"
 }

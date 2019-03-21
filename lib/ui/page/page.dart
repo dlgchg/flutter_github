@@ -12,3 +12,4 @@ export 'trees.dart';
 export 'branch.dart';
 export 'users_detail.dart';
 export 'person_set.dart';
+export 'update_info.dart';

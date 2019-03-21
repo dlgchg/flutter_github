@@ -20,14 +20,26 @@ Observable post(String url, {Map<String, dynamic> params}) {
 }
 
 Observable activity(int type, String url,
-    {Map<String, dynamic> params, Options options}) {
-  return Observable.fromFuture(
-    type == 0
-        ? _activityGet(url, params: params, options: options)
-        : (type == 1
-            ? _activityPut(url, params: params, options: options)
-            : _activityDelete(url, params: params, options: options)),
-  ).asBroadcastStream();
+    {Map<String, dynamic> params}) {
+  Future future;
+  switch (type) {
+    case 0:
+      future = _activityGet(url, params: params);
+      break;
+    case 1:
+      future = _activityPut(url, params: params);
+      break;
+    case 2:
+      future = _activityDelete(url, params: params);
+      break;
+    case 3:
+      future = _activityPatch(url, params: params);
+      break;
+    case 4:
+      future = _activityPost(url, params: params);
+      break;
+  }
+  return Observable.fromFuture(future).asBroadcastStream();
 }
 
 Observable postLoginJson(String url, {Object params}) {
@@ -42,23 +54,37 @@ Future futureGet(String url,
 }
 
 Future _activityPut(String url,
-    {Map<String, dynamic> params, Options options}) async {
+    {Map<String, dynamic> params}) async {
   Response response =
-      await dioActivity.put(url, queryParameters: params, options: options);
+      await dioActivity.put(url, queryParameters: params);
   return response;
 }
 
 Future _activityGet(String url,
-    {Map<String, dynamic> params, Options options}) async {
+    {Map<String, dynamic> params}) async {
   Response response =
-      await dioActivity.get(url, queryParameters: params, options: options);
+      await dioActivity.get(url, queryParameters: params);
   return response;
 }
 
 Future _activityDelete(String url,
-    {Map<String, dynamic> params, Options options}) async {
+    {Map<String, dynamic> params}) async {
   Response response =
-      await dioActivity.delete(url, queryParameters: params, options: options);
+      await dioActivity.delete(url, queryParameters: params);
+  return response;
+}
+
+Future _activityPost(String url,
+    {Map<String, dynamic> params}) async {
+  Response response =
+      await dioActivity.post(url, data: json.encode(params));
+  return response;
+}
+
+Future _activityPatch(String url,
+    {Map<String, dynamic> params}) async {
+  Response response =
+  await dioActivity.patch(url, data: json.encode(params));
   return response;
 }
 
@@ -66,6 +92,7 @@ Future futurePost(String url, {Map<String, dynamic> params}) async {
   Response response = await dio.post(url, data: params);
   return response;
 }
+
 
 Future _postLoginJson(String url, {Object params}) async {
   Response response = await dioLogin.post(url, data: json.encode(params));

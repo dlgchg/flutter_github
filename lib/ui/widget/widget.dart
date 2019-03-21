@@ -382,7 +382,7 @@ Widget searchUsersItem(BuildContext context, SearchUserItem item) {
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => UsersDetailPage(item.url)),
+        MaterialPageRoute(builder: (context) => UsersDetailPage(item.url, item.login)),
       );
     },
     child: Column(
@@ -459,7 +459,7 @@ Widget reposUsersItem(BuildContext context, ReposUserEntity item) {
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => UsersDetailPage(item.url)),
+        MaterialPageRoute(builder: (context) => UsersDetailPage(item.url, item.login)),
       );
     },
     child: Column(

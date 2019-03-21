@@ -48,6 +48,7 @@ class S implements WidgetsLocalizations {
   String get sort => "sort";
   String get star => "stars";
   String get stars => "Stars";
+  String get updated => "Updated";
   String get updates => "updates";
   String get userName => "UserName";
   String get watches => "Watches";
@@ -130,6 +131,8 @@ class $zh extends S {
   String get daily => "今天";
   @override
   String get monthly => "本月";
+  @override
+  String get updated => "修改";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {

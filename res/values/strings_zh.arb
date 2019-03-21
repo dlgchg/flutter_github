@@ -31,5 +31,6 @@
   "star": "stars",
   "exit": "退出",
   "exit_n": "退出将会清空所有信息!",
-  "cancel": "取消"
+  "cancel": "取消",
+  "updated": "修改"
 }
