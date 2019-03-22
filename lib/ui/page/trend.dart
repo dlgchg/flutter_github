@@ -72,7 +72,7 @@ class _TrendPageState extends State<TrendPage> {
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   TrendEntity trendEntity = TrendEntity.fromJson(list[index]);
-                  return trendItem(context, trendEntity);
+                  return trendItem(context, trendEntity, index);
                 },
                 itemCount: list.length,
               ),

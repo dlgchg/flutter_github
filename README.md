@@ -4,6 +4,8 @@
 
 还在更新中... 待完成events, delete repos, sqflite, app set.
 
+目前还有很多待修复的bug.
+
 希望大家给点意见。
 
 

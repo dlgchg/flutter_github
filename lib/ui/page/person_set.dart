@@ -64,25 +64,28 @@ class _PersonSetPageState extends State<PersonSetPage> {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: Text(S.of(context).exit_n),
-                          actions: <Widget>[
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                setValue(access_token, '');
-                                Navigator.pushReplacementNamed(
-                                    context, '/login');
-                              },
-                              child: Text(S.of(context).exit),
+                              title: Text(S.of(context).exit_n),
+                              actions: <Widget>[
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    setValue(access_token, '');
+                                    Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      '/login',
+                                      (_) => false,
+                                    );
+                                  },
+                                  child: Text(S.of(context).exit),
+                                ),
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(S.of(context).cancel),
+                                ),
+                              ],
                             ),
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(S.of(context).cancel),
-                            ),
-                          ],
-                        ),
                       );
                     },
                   ),

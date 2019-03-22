@@ -255,7 +255,7 @@ class _PersonPageState extends State<PersonPage> {
               itemBuilder: (context, index) {
                 ContributionsContribution contribution = list[index];
                 return Tooltip(
-                  message: contribution.date.toString(),
+                  message: contribution.count.toString(),
                   child: Container(
                     width: dimen12,
                     height: dimen12,
