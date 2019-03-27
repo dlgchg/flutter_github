@@ -68,11 +68,13 @@ class GitHubNet {
     return await getNoGitApi('https://github-contributions-api.now.sh/v1/$login');
   }
 
-  Future search(int type, String q, {String sort, String order, String language}) async {
+  Future search(int type, String q, int page, {String sort, String order, String language, int size}) async {
     return await futureGet(type == 0 ? 'search/repositories' : 'search/users', params: {
       'q':q + (language != null && language.isNotEmpty ? '+language:'+language : ''),
       'sort': sort ?? 'best match',
       'order': order ?? 'desc',
+      'page': page,
+      'size': size ?? 30,
     });
   }
   

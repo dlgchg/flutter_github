@@ -7,6 +7,9 @@ import '../../delegate/delegate.dart';
 import 'package:dio/dio.dart';
 import '../../model/model.dart';
 import '../widget/widget.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_easyrefresh/material_header.dart';
+import 'package:flutter_easyrefresh/material_footer.dart';
 
 /*
  * @Date: 2019-03-13 17:19 
@@ -23,16 +26,20 @@ class _SearchPageState extends State<SearchPage>
   TabController _tabController;
   TextEditingController _textEditingController = TextEditingController();
 
+  bool get wantKeepAlive => true;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(() {});
+    gitHubProvide.page = 0;
   }
 
   int _index = 0;
   bool _order = true;
+  List<Map> list = [];
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +106,10 @@ class _SearchPageState extends State<SearchPage>
             itemBuilder: (context) {
               return (_index == 0 ? sort : userSort).map((s) {
                 return CheckedPopupMenuItem(
-                  checked: s == (_index == 0 ? gitHubProvide.searchReposSort : gitHubProvide.searchUsersSort),
+                  checked: s ==
+                      (_index == 0
+                          ? gitHubProvide.searchReposSort
+                          : gitHubProvide.searchUsersSort),
                   value: s,
                   child: Text(s),
                 );
@@ -123,7 +133,6 @@ class _SearchPageState extends State<SearchPage>
           controller: _tabController,
           isScrollable: true,
           onTap: (index) {
-
             gitHubProvide.searchType = index;
             setState(() {
               _index = index;
@@ -143,39 +152,63 @@ class _SearchPageState extends State<SearchPage>
       body: FutureBuilder(
         future: gitHubProvide.getSearch(),
         builder: (context, snapshot) {
-          if(snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
             );
           }
-          if(snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
               Response response = snapshot.data;
               Map map = response.data;
               if (response.statusCode == 200 && map['items'] != null) {
                 List<Map> list = (map['items'] as List).cast();
-                return ListView.builder(
-                  itemBuilder: (context, index) {
-                    if (_index == 0) {
-                      SearchReposItem item =
-                      SearchReposItem.fromJson(list[index]);
-                      return searchReposItem(context, item);
-                    } else {
-                      SearchUserItem item =
-                      SearchUserItem.fromJson(list[index]);
-                      return searchUsersItem(context, item);
-                    }
+                return EasyRefresh(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      if (_index == 0) {
+                        SearchReposItem item =
+                            SearchReposItem.fromJson(list[index]);
+                        return searchReposItem(context, item);
+                      } else {
+                        SearchUserItem item =
+                            SearchUserItem.fromJson(list[index]);
+                        return searchUsersItem(context, item);
+                      }
+                    },
+                    itemCount: list.length,
+                  ),
+                  onRefresh: (){
+                    gitHubProvide.page = 0;
+                    _load();
                   },
-                  itemCount: list.length,
+                  loadMore: (){
+                    gitHubProvide.page++;
+                    _load();
+                  },
+                  refreshHeader: MaterialHeader(key: headerKey),
+                  refreshFooter: MaterialFooter(key: footerKey),
                 );
               }
             } else {
               return Container();
             }
           }
-
         },
       ),
     );
+  }
+
+  _load() async {
+    await gitHubProvide.getSearch().then((data) {
+      Response response = data;
+      Map map = response.data;
+      if (response.statusCode == 200 && map['items'] != null) {
+        List<Map> loadList = (map['items'] as List).cast();
+        setState(() {
+          list.addAll(loadList);
+        });
+      }
+    });
   }
 }

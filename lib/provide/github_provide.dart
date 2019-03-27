@@ -189,6 +189,7 @@ class GitHubProvide with ChangeNotifier {
     return await _gitHubNet.search(
       searchType,
       searchKey,
+      page,
       sort: searchType == 0 ? searchReposSort : searchUsersSort,
       order: searchOrder,
       language: searchLanguages,
