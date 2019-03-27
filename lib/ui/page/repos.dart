@@ -83,6 +83,7 @@ class _ReposPageState extends State<ReposPage>
     ];
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(userRepos.name ?? userRepos.login),
         bottom: TabBar(
           isScrollable: true,

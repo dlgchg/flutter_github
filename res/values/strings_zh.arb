@@ -5,7 +5,7 @@
   "bottomNavigationBarTitle3": "搜索",
   "bottomNavigationBarTitle4": "我",
   "login": "登录",
-  "userName": "用户名",
+  "userName": "邮箱",
   "passWord": "密码",
   "nameOrPassWordIsNotEmpty": "用户名或者明白不能为空!",
   "repositories": "Repositories",

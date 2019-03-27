@@ -27,6 +27,7 @@ class _PersonSetPageState extends State<PersonSetPage> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(userEntity.login),
       ),
       body: Provide<GitHubProvide>(builder: (context, child, provide) {

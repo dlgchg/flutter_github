@@ -244,7 +244,7 @@ Widget trendItem(BuildContext context, TrendEntity trendEntity, int index) {
         Container(
           margin: EdgeInsets.only(right: dimen5),
           child: index < 3 ? trendIcon[index] : null,
-        )
+        ),
       ],
     ),
   );
@@ -285,7 +285,12 @@ Widget searchReposItem(BuildContext context, SearchReposItem item) {
                       color: containerColor,
                       borderRadius: BorderRadius.circular(dimen5),
                       image: DecorationImage(
-                        image: NetworkImage(item.owner.avatarUrl ?? avatarUrl),
+                        image: NetworkImage(
+                          (item.owner.avatarUrl == null ||
+                                  item.owner.avatarUrl.isEmpty)
+                              ? avatarUrl
+                              : item.owner.avatarUrl,
+                        ),
                       ),
                     ),
                   ),
@@ -391,7 +396,8 @@ Widget searchUsersItem(BuildContext context, SearchUserItem item) {
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => UsersDetailPage(item.url, item.login)),
+        MaterialPageRoute(
+            builder: (context) => UsersDetailPage(item.url, item.login)),
       );
     },
     child: Column(
@@ -468,7 +474,8 @@ Widget reposUsersItem(BuildContext context, ReposUserEntity item) {
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => UsersDetailPage(item.url, item.login)),
+        MaterialPageRoute(
+            builder: (context) => UsersDetailPage(item.url, item.login)),
       );
     },
     child: Column(

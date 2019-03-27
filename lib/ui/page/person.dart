@@ -30,6 +30,7 @@ class _PersonPageState extends State<PersonPage> {
     gitHubProvide.login = userEntity.login;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           userEntity.name,
           overflow: TextOverflow.ellipsis,

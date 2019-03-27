@@ -6,7 +6,7 @@
   "bottomNavigationBarTitle4": "Me",
 
   "login": "Login",
-  "userName": "UserName",
+  "userName": "Email",
   "passWord": "PassWord",
   "nameOrPassWordIsNotEmpty": "username or password is not empty!",
   "repositories": "Repositories",

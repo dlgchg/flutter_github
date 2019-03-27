@@ -22,7 +22,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController;
   TextEditingController _textEditingController = TextEditingController();
 
@@ -162,7 +162,7 @@ class _SearchPageState extends State<SearchPage>
               Response response = snapshot.data;
               Map map = response.data;
               if (response.statusCode == 200 && map['items'] != null) {
-                List<Map> list = (map['items'] as List).cast();
+                list = (map['items'] as List).cast();
                 return EasyRefresh(
                   child: ListView.builder(
                     itemBuilder: (context, index) {

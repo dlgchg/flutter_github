@@ -50,7 +50,7 @@ class S implements WidgetsLocalizations {
   String get stars => "Stars";
   String get updated => "Updated";
   String get updates => "updates";
-  String get userName => "UserName";
+  String get userName => "Email";
   String get watches => "Watches";
   String get weekly => "weekly";
 }
@@ -112,7 +112,7 @@ class $zh extends S {
   @override
   String get sort => "排序依据";
   @override
-  String get userName => "用户名";
+  String get userName => "邮箱";
   @override
   String get bottomNavigationBarTitle4 => "我";
   @override
