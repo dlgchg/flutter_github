@@ -4,6 +4,7 @@ import '../../top_config.dart';
 import '../../res/res.dart';
 import '../../common/common.dart';
 import '../../util/util.dart';
+import 'dart:math';
 
 
 /*
@@ -16,7 +17,8 @@ class SplashPage extends StatefulWidget {
   _SplashPageState createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateMixin{
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

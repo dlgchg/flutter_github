@@ -1,14 +1,14 @@
-import 'package:flutter_github/model/search_user_entity.dart';
-import 'package:flutter_github/model/trend_entity.dart';
-import 'package:flutter_github/model/branch_entity.dart';
-import 'package:flutter_github/model/user_entity.dart';
-import 'package:flutter_github/model/repos_entity.dart';
-import 'package:flutter_github/model/user_repos_entity.dart';
-import 'package:flutter_github/model/star_entity.dart';
-import 'package:flutter_github/model/search_repos_entity.dart';
-import 'package:flutter_github/model/repos_user_entity.dart';
-import 'package:flutter_github/model/trees_entity.dart';
-import 'package:flutter_github/model/contributions_entity.dart';
+import 'package:Fg/model/search_user_entity.dart';
+import 'package:Fg/model/trend_entity.dart';
+import 'package:Fg/model/branch_entity.dart';
+import 'package:Fg/model/user_entity.dart';
+import 'package:Fg/model/repos_entity.dart';
+import 'package:Fg/model/user_repos_entity.dart';
+import 'package:Fg/model/star_entity.dart';
+import 'package:Fg/model/search_repos_entity.dart';
+import 'package:Fg/model/repos_user_entity.dart';
+import 'package:Fg/model/trees_entity.dart';
+import 'package:Fg/model/contributions_entity.dart';
 
 class EntityFactory {
   static T generateOBJ<T>(json) {
