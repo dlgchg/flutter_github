@@ -2,11 +2,6 @@
 
 使用flutter开发github客户端，练手用的，赞。
 
-还在更新中... 待完成events, delete repos, sqflite, app set.
-
-目前还有很多待修复的bug.
-
-希望大家给点意见。
 
 
 <img src="https://raw.githubusercontent.com/dlgchg/flutter_github/master/screen_shot/s1.png" width=207 height=448 />  <img src="https://raw.githubusercontent.com/dlgchg/flutter_github/master/screen_shot/s2.png" width=207 height=448 />  <img src="https://raw.githubusercontent.com/dlgchg/flutter_github/master/screen_shot/s3.png" width=207 height=448 />
